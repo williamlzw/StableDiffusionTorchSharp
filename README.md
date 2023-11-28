@@ -1,3 +1,6 @@
+# Introduction
+Stable Diffusion model v1.5 for TorchSharp.  
+The cpu requires a minimum of 16GB of memory.
 # download code
 https://github.com/kjsman/stable-diffusion-pytorch
 
