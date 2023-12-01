@@ -1,14 +1,8 @@
 # Introduction
 Stable Diffusion model v1.5 for TorchSharp.  
 The cpu requires a minimum of 16GB of memory.
-# download code
-https://github.com/kjsman/stable-diffusion-pytorch
-
-# download checkpoint and put it into python code
-https://huggingface.co/jinseokim/stable-diffusion-pytorch-data/tree/main/data.v20221029.tar
-
-# convert checkpoint to torchsharp
-python export_torchsharp.py
+# download checkpoint
+https://huggingface.co/williamlzw/stable-diffusion-1-5-torchsharp
 
 # inference model with torchsharp
 run c# program
