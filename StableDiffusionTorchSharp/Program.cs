@@ -3,89 +3,107 @@ using static TorchSharp.torch;
 
 namespace StableDiffusionTorchSharp
 {
-    public class Program
-    {
-        public static void Main()
-        {
-            Generate();
-        }
+	public class Program
+	{
+		public static void Main()
+		{
+			Generate();
+		}
 
-        public static Tensor GetTimeEnmedding(float timestep)
-        {
-            var freqs = torch.pow(10000, -torch.arange(0, 160, dtype: torch.float32) / 160);
-            var x = torch.tensor(new float[] { timestep }, dtype: torch.float32)[torch.TensorIndex.Colon, torch.TensorIndex.None] * freqs[torch.TensorIndex.None];
-            return torch.cat(new Tensor[] { torch.cos(x), torch.sin(x) }, dim: -1);
-        }
+		public static Tensor GetTimeEnmedding(float timestep)
+		{
+			var freqs = torch.pow(10000, -torch.arange(0, 160, dtype: torch.float32) / 160);
+			var x = torch.tensor(new float[] { timestep }, dtype: torch.float32)[torch.TensorIndex.Colon, torch.TensorIndex.None] * freqs[torch.TensorIndex.None];
+			return torch.cat(new Tensor[] { torch.cos(x), torch.sin(x) }, dim: -1);
+		}
 
-        public static void Generate()
-        {
-            using (torch.no_grad())
-            {
-                int num_inference_steps = 15;
-                var device = torch.device("cpu");
-                torchvision.io.DefaultImager = new torchvision.io.SkiaImager(100);
-                var clip = new CLIP();
-                clip.load("model\\clip.dat");
-                clip.eval();
+		public static void Generate()
+		{
+			using (torch.no_grad())
+			{
+				string modelname = @".\model\sunshinemix_PrunedFp16.safetensors";
+				int num_inference_steps = 15;
+				var device = torch.device("cuda");
+				torchvision.io.DefaultImager = new torchvision.io.SkiaImager(100);
 
-                string VocabPath = "model\\vocab.json";
-                string MergesPath = "model\\merges.txt";
-                var tokenizer = new Tokenizer(VocabPath, MergesPath);
+				Console.WriteLine("Loading clip model......");
+				var clip = new CLIP().half();
 
-                string prompt = "typographic art bird. stylized, intricate, detailed, artistic, text-based";
-                string uncond_prompts = "";
+				clip.load(modelname);
+				clip = clip.to(device);
+				clip.eval();
+				Console.WriteLine("Clip model loaded.");
 
-                var cond_tokens_ids = tokenizer.Encode(prompt);
-                var cond_tokens = torch.tensor(cond_tokens_ids, torch.@long).unsqueeze(0);
-                var cond_context = clip.forward(cond_tokens);
+				Console.WriteLine("Clip the prompt.");
 
-                var uncond_tokens_ids = tokenizer.Encode(uncond_prompts);
-                var uncond_tokens = torch.tensor(uncond_tokens_ids, torch.@long).unsqueeze(0);
-                var uncond_context = clip.forward(uncond_tokens);
+				string VocabPath = @".\model\vocab.json";
+				string MergesPath = @".\model\merges.txt";
+				var tokenizer = new Tokenizer(VocabPath, MergesPath);
 
-                var context = torch.cat(new Tensor[] { cond_context, uncond_context }).to(device);
+				string prompt = "typographic art bird. stylized, intricate, detailed, artistic, text-based";
+				string uncond_prompts = "";
 
-                torch.save(context, "context.dat");
-                //var context = torch.load("context.dat");
+				var cond_tokens_ids = tokenizer.Encode(prompt);
+				var cond_tokens = torch.tensor(cond_tokens_ids, torch.@long).unsqueeze(0).to(device);
+				var cond_context = clip.forward(cond_tokens);
 
-                var diffusion = new Diffusion();
-                diffusion.load("model\\unet.dat").to(device);
-                diffusion.eval();
-                long[] noise_shape = new long[] { 1, 4, 64, 64 };
-                var latents = torch.randn(noise_shape, device: device);
-                var sampler = new EulerDiscreteScheduler();
+				var uncond_tokens_ids = tokenizer.Encode(uncond_prompts);
+				var uncond_tokens = torch.tensor(uncond_tokens_ids, torch.@long).unsqueeze(0).to(device);
+				var uncond_context = clip.forward(uncond_tokens);
 
-                sampler.SetTimesteps(num_inference_steps, device);
-                latents *= sampler.InitNoiseSigma();
+				var context = torch.cat(new Tensor[] { cond_context, uncond_context });
 
-                for (int i = 0; i < num_inference_steps; i++)
-                {
-                    Console.WriteLine($"begin step");
-                    var timestep = sampler.timesteps_[i];
-                    var time_embedding = GetTimeEnmedding(timestep.ToSingle()).to(device);
-                    var input_latents = sampler.ScaleModelInput(latents, timestep);
-                    input_latents = input_latents.repeat(2, 1, 1, 1).to(device);
-                    var output = diffusion.forward(input_latents, context, time_embedding);
-                    var ret = output.chunk(2);
-                    var output_cond = ret[0];
-                    var output_uncond = ret[1];
-                    output = 7.5 * (output_cond - output_uncond) + output_uncond;
-                    latents = sampler.Step(output, timestep, latents);
-                    torch.save(latents, $"latent{i}.dat");
-                    Console.WriteLine($"end step, {i}");
-                }
+				//torch.save(context, "context.dat");
+				//var context = torch.load("context.dat");
+				Console.WriteLine("Clip done.");
 
-                //var latents = torch.load("latent14.dat");
-                var decoder = new Decoder();
-                decoder.load("model\\decoder.dat");
-                decoder.eval();
-                Console.WriteLine($"begin decoder");
-                var images = decoder.forward(latents.cpu());
-                Console.WriteLine($"end decoder");
-                images = images.clip(-1, 1) * 0.5 + 0.5;
-                images = torchvision.transforms.functional.convert_image_dtype(images, torch.ScalarType.Byte);
-                torchvision.io.write_jpeg(images, "result1.jpg");
-            }
-        }
-    }
+				Console.WriteLine("Loading diffuson model......");
+				var diffusion = new Diffusion().half();
+				diffusion.load(modelname);
+				diffusion = diffusion.to(device);
+				diffusion.eval();
+				Console.WriteLine("Loading diffuson model......");
+				long[] noise_shape = new long[] { 1, 4, 64, 64 };
+				var latents = torch.randn(noise_shape, device: device);
+				var sampler = new EulerDiscreteScheduler();
+				Console.WriteLine("Diffuson model loaded");
+
+				Console.WriteLine("Generate begin......");
+				sampler.SetTimesteps(num_inference_steps, device);
+				latents *= sampler.InitNoiseSigma();
+
+				for (int i = 0; i < num_inference_steps; i++)
+				{
+					Console.WriteLine($"begin step");
+					var timestep = sampler.timesteps_[i];
+					var time_embedding = GetTimeEnmedding(timestep.ToSingle()).half().to(device);
+					var input_latents = sampler.ScaleModelInput(latents, timestep);
+					input_latents = input_latents.repeat(2, 1, 1, 1).half().to(device);
+					var output = diffusion.forward(input_latents, context, time_embedding);
+					var ret = output.chunk(2);
+					var output_cond = ret[0];
+					var output_uncond = ret[1];
+					output = 7.5 * (output_cond - output_uncond) + output_uncond;
+					latents = sampler.Step(output, timestep, latents);
+					//torch.save(latents, $"latent{i}.dat");
+					Console.WriteLine($"end step, {i}");
+				}
+
+				//var latents = torch.load("latent14.dat").half().to(device);
+
+				var decoder = new Decoder().half();
+				decoder.load(modelname);
+				decoder = decoder.to(device);
+				decoder.eval();
+				Console.WriteLine($"begin decoder");
+				var images = decoder.forward(latents.half().to(device));
+				Console.WriteLine($"end decoder");
+				images = images.clip(-1, 1) * 0.5 + 0.5;
+				images = images.cpu();
+				images = torchvision.transforms.functional.convert_image_dtype(images, torch.ScalarType.Byte);
+				torchvision.io.write_jpeg(images, "result.jpg");
+				Console.WriteLine("Image save to result.jpg");
+			}
+		}
+	}
 }

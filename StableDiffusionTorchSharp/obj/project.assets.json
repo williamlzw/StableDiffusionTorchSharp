@@ -1,0 +1,1175 @@
+{
+  "version": 3,
+  "targets": {
+    "net6.0": {
+      "Google.Protobuf/3.21.9": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0/Google.Protobuf.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net5.0/Google.Protobuf.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "libtorch-cuda-12.1-win-x64/2.2.1.1": {
+        "type": "package",
+        "dependencies": {
+          "libtorch-cuda-12.1-win-x64-part1": "2.2.1.1",
+          "libtorch-cuda-12.1-win-x64-part10": "2.2.1.1",
+          "libtorch-cuda-12.1-win-x64-part2": "2.2.1.1",
+          "libtorch-cuda-12.1-win-x64-part3-fragment1": "2.2.1.1",
+          "libtorch-cuda-12.1-win-x64-part3-primary": "2.2.1.1",
+          "libtorch-cuda-12.1-win-x64-part4": "2.2.1.1",
+          "libtorch-cuda-12.1-win-x64-part5-fragment1": "2.2.1.1",
+          "libtorch-cuda-12.1-win-x64-part5-primary": "2.2.1.1",
+          "libtorch-cuda-12.1-win-x64-part6": "2.2.1.1",
+          "libtorch-cuda-12.1-win-x64-part7": "2.2.1.1",
+          "libtorch-cuda-12.1-win-x64-part8": "2.2.1.1",
+          "libtorch-cuda-12.1-win-x64-part9-fragment1": "2.2.1.1",
+          "libtorch-cuda-12.1-win-x64-part9-fragment2": "2.2.1.1",
+          "libtorch-cuda-12.1-win-x64-part9-primary": "2.2.1.1"
+        },
+        "build": {
+          "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64.props": {},
+          "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64.targets": {}
+        }
+      },
+      "libtorch-cuda-12.1-win-x64-part1/2.2.1.1": {
+        "type": "package",
+        "build": {
+          "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part1.props": {},
+          "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part1.targets": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win-x64/native/asmjit.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/c10.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/c10_cuda.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/caffe2_nvrtc.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/cublas64_12.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/cudart64_12.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/cudnn64_8.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/nvJitLink_120_0.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/nvrtc64_120_0.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/torch_global_deps.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/uv.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/zlibwapi.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          }
+        }
+      },
+      "libtorch-cuda-12.1-win-x64-part10/2.2.1.1": {
+        "type": "package",
+        "build": {
+          "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part10.props": {},
+          "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part10.targets": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win-x64/native/cufft64_11.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/cufftw64_11.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/cupti64_2023.1.1.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/curand64_10.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          }
+        }
+      },
+      "libtorch-cuda-12.1-win-x64-part2/2.2.1.1": {
+        "type": "package",
+        "build": {
+          "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part2.props": {},
+          "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part2.targets": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win-x64/native/cudnn_adv_infer64_8.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/cudnn_adv_train64_8.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          }
+        }
+      },
+      "libtorch-cuda-12.1-win-x64-part3-fragment1/2.2.1.1": {
+        "type": "package",
+        "build": {
+          "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part3-fragment1.props": {},
+          "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part3-fragment1.targets": {}
+        }
+      },
+      "libtorch-cuda-12.1-win-x64-part3-primary/2.2.1.1": {
+        "type": "package",
+        "build": {
+          "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part3-primary.props": {},
+          "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part3-primary.targets": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win-x64/native/cudnn_cnn_infer64_8.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/cudnn_cnn_infer64_8.dll.sha": {
+            "assetType": "native",
+            "rid": "win-x64"
+          }
+        }
+      },
+      "libtorch-cuda-12.1-win-x64-part4/2.2.1.1": {
+        "type": "package",
+        "build": {
+          "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part4.props": {},
+          "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part4.targets": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win-x64/native/cudnn_cnn_train64_8.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/cudnn_ops_infer64_8.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/cudnn_ops_train64_8.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          }
+        }
+      },
+      "libtorch-cuda-12.1-win-x64-part5-fragment1/2.2.1.1": {
+        "type": "package",
+        "build": {
+          "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part5-fragment1.props": {},
+          "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part5-fragment1.targets": {}
+        }
+      },
+      "libtorch-cuda-12.1-win-x64-part5-primary/2.2.1.1": {
+        "type": "package",
+        "build": {
+          "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part5-primary.props": {},
+          "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part5-primary.targets": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win-x64/native/cublasLt64_12.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/cublasLt64_12.dll.sha": {
+            "assetType": "native",
+            "rid": "win-x64"
+          }
+        }
+      },
+      "libtorch-cuda-12.1-win-x64-part6/2.2.1.1": {
+        "type": "package",
+        "build": {
+          "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part6.props": {},
+          "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part6.targets": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win-x64/native/cusolver64_11.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/cusolverMg64_11.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/fbgemm.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/fbjni.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/libiomp5md.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/libiompstubs5md.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/nvToolsExt64_1.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/nvrtc-builtins64_121.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          }
+        }
+      },
+      "libtorch-cuda-12.1-win-x64-part7/2.2.1.1": {
+        "type": "package",
+        "build": {
+          "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part7.props": {},
+          "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part7.targets": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win-x64/native/pytorch_jni.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/torch.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/torch_cpu.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          }
+        }
+      },
+      "libtorch-cuda-12.1-win-x64-part8/2.2.1.1": {
+        "type": "package",
+        "build": {
+          "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part8.props": {},
+          "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part8.targets": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win-x64/native/cusparse64_12.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          }
+        }
+      },
+      "libtorch-cuda-12.1-win-x64-part9-fragment1/2.2.1.1": {
+        "type": "package",
+        "build": {
+          "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part9-fragment1.props": {},
+          "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part9-fragment1.targets": {}
+        }
+      },
+      "libtorch-cuda-12.1-win-x64-part9-fragment2/2.2.1.1": {
+        "type": "package",
+        "build": {
+          "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part9-fragment2.props": {},
+          "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part9-fragment2.targets": {}
+        }
+      },
+      "libtorch-cuda-12.1-win-x64-part9-primary/2.2.1.1": {
+        "type": "package",
+        "build": {
+          "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part9-primary.props": {},
+          "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part9-primary.targets": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win-x64/native/torch_cuda.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/torch_cuda.dll.sha": {
+            "assetType": "native",
+            "rid": "win-x64"
+          }
+        }
+      },
+      "Newtonsoft.Json/13.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "SharpZipLib/1.4.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/ICSharpCode.SharpZipLib.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/ICSharpCode.SharpZipLib.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "SkiaSharp/2.88.6": {
+        "type": "package",
+        "dependencies": {
+          "SkiaSharp.NativeAssets.Win32": "2.88.6",
+          "SkiaSharp.NativeAssets.macOS": "2.88.6"
+        },
+        "compile": {
+          "lib/net6.0/SkiaSharp.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/SkiaSharp.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "SkiaSharp.NativeAssets.Linux.NoDependencies/2.88.6": {
+        "type": "package",
+        "dependencies": {
+          "SkiaSharp": "2.88.6"
+        },
+        "compile": {
+          "lib/net6.0/_._": {}
+        },
+        "runtime": {
+          "lib/net6.0/_._": {}
+        },
+        "runtimeTargets": {
+          "runtimes/linux-arm/native/libSkiaSharp.so": {
+            "assetType": "native",
+            "rid": "linux-arm"
+          },
+          "runtimes/linux-arm64/native/libSkiaSharp.so": {
+            "assetType": "native",
+            "rid": "linux-arm64"
+          },
+          "runtimes/linux-musl-x64/native/libSkiaSharp.so": {
+            "assetType": "native",
+            "rid": "linux-musl-x64"
+          },
+          "runtimes/linux-x64/native/libSkiaSharp.so": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          }
+        }
+      },
+      "SkiaSharp.NativeAssets.macOS/2.88.6": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/_._": {}
+        },
+        "runtime": {
+          "lib/net6.0/_._": {}
+        },
+        "runtimeTargets": {
+          "runtimes/osx/native/libSkiaSharp.dylib": {
+            "assetType": "native",
+            "rid": "osx"
+          }
+        }
+      },
+      "SkiaSharp.NativeAssets.Win32/2.88.6": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/_._": {}
+        },
+        "runtime": {
+          "lib/net6.0/_._": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win-arm64/native/libSkiaSharp.dll": {
+            "assetType": "native",
+            "rid": "win-arm64"
+          },
+          "runtimes/win-x64/native/libSkiaSharp.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x86/native/libSkiaSharp.dll": {
+            "assetType": "native",
+            "rid": "win-x86"
+          }
+        }
+      },
+      "System.Memory/4.5.5": {
+        "type": "package",
+        "compile": {
+          "ref/netcoreapp2.1/_._": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.1/_._": {}
+        }
+      },
+      "TorchSharp/0.102.6": {
+        "type": "package",
+        "dependencies": {
+          "Google.Protobuf": "3.21.9",
+          "SharpZipLib": "1.4.0",
+          "SkiaSharp": "2.88.6",
+          "System.Memory": "4.5.5"
+        },
+        "compile": {
+          "lib/net6.0/TorchSharp.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/TorchSharp.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net6.0/TorchSharp.props": {},
+          "buildTransitive/net6.0/TorchSharp.targets": {}
+        },
+        "runtimeTargets": {
+          "runtimes/linux-x64/native/libLibTorchSharp.so": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/osx-arm64/native/libLibTorchSharp.dylib": {
+            "assetType": "native",
+            "rid": "osx-arm64"
+          },
+          "runtimes/osx-x64/native/libLibTorchSharp.dylib": {
+            "assetType": "native",
+            "rid": "osx-x64"
+          },
+          "runtimes/win-x64/native/LibTorchSharp.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          }
+        }
+      },
+      "TorchSharp-cuda-windows/0.102.6": {
+        "type": "package",
+        "dependencies": {
+          "TorchSharp": "0.102.6",
+          "libtorch-cuda-12.1-win-x64": "2.2.1.1"
+        },
+        "build": {
+          "buildTransitive/net6.0/TorchSharp-cuda-windows.props": {},
+          "buildTransitive/net6.0/TorchSharp-cuda-windows.targets": {}
+        }
+      },
+      "TorchVision/0.102.6": {
+        "type": "package",
+        "dependencies": {
+          "SkiaSharp": "2.88.6",
+          "SkiaSharp.NativeAssets.Linux.NoDependencies": "2.88.6",
+          "TorchSharp": "0.102.6"
+        },
+        "compile": {
+          "lib/net6.0/TorchVision.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/TorchVision.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net6.0/TorchVision.props": {},
+          "buildTransitive/net6.0/TorchVision.targets": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Google.Protobuf/3.21.9": {
+      "sha512": "OTpFujTgkmqMLbg3KT7F/iuKi1rg6s5FCS2M9XcVLDn40zL8wgXm37CY/F6MeOEXKjdcnXGCN/h7oyMkVydVsg==",
+      "type": "package",
+      "path": "google.protobuf/3.21.9",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "google.protobuf.3.21.9.nupkg.sha512",
+        "google.protobuf.nuspec",
+        "lib/net45/Google.Protobuf.dll",
+        "lib/net45/Google.Protobuf.pdb",
+        "lib/net45/Google.Protobuf.xml",
+        "lib/net5.0/Google.Protobuf.dll",
+        "lib/net5.0/Google.Protobuf.pdb",
+        "lib/net5.0/Google.Protobuf.xml",
+        "lib/netstandard1.1/Google.Protobuf.dll",
+        "lib/netstandard1.1/Google.Protobuf.pdb",
+        "lib/netstandard1.1/Google.Protobuf.xml",
+        "lib/netstandard2.0/Google.Protobuf.dll",
+        "lib/netstandard2.0/Google.Protobuf.pdb",
+        "lib/netstandard2.0/Google.Protobuf.xml"
+      ]
+    },
+    "libtorch-cuda-12.1-win-x64/2.2.1.1": {
+      "sha512": "fSFsCwBtQqoLV5Ede1fsymQHU1Fw50JN5A+29hu+IHuTOskFLM7AUUFTm8ljlyVghlC8CjsuYhjFSQoyt8PGXQ==",
+      "type": "package",
+      "path": "libtorch-cuda-12.1-win-x64/2.2.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE-LIBTORCH.txt",
+        "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64.props",
+        "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64.targets",
+        "lib/netstandard2.0/_._/empty.txt",
+        "libtorch-cuda-12.1-win-x64.2.2.1.1.nupkg.sha512",
+        "libtorch-cuda-12.1-win-x64.nuspec"
+      ]
+    },
+    "libtorch-cuda-12.1-win-x64-part1/2.2.1.1": {
+      "sha512": "FJuypx3MUPbbMWDqj0vxAcQs7Xs9GK2D1ed1BeqN10lt7MpsTyXUORg8pxokzbbjEBlnf0wC8d25JN1oL46l4w==",
+      "type": "package",
+      "path": "libtorch-cuda-12.1-win-x64-part1/2.2.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE-LIBTORCH.txt",
+        "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part1.props",
+        "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part1.targets",
+        "lib/netstandard2.0/_._/empty.txt",
+        "libtorch-cuda-12.1-win-x64-part1.2.2.1.1.nupkg.sha512",
+        "libtorch-cuda-12.1-win-x64-part1.nuspec",
+        "runtimes/win-x64/native/asmjit.dll",
+        "runtimes/win-x64/native/c10.dll",
+        "runtimes/win-x64/native/c10_cuda.dll",
+        "runtimes/win-x64/native/caffe2_nvrtc.dll",
+        "runtimes/win-x64/native/cublas64_12.dll",
+        "runtimes/win-x64/native/cudart64_12.dll",
+        "runtimes/win-x64/native/cudnn64_8.dll",
+        "runtimes/win-x64/native/nvJitLink_120_0.dll",
+        "runtimes/win-x64/native/nvrtc64_120_0.dll",
+        "runtimes/win-x64/native/torch_global_deps.dll",
+        "runtimes/win-x64/native/uv.dll",
+        "runtimes/win-x64/native/zlibwapi.dll"
+      ]
+    },
+    "libtorch-cuda-12.1-win-x64-part10/2.2.1.1": {
+      "sha512": "Pl/4S1P5Axgs7VAsdIm+zXwyd238zsKqOHnL6alNGF6UmjW4scSfLvemzQ80iK08VSqUOo2Zf2PDRD4T2iAyoA==",
+      "type": "package",
+      "path": "libtorch-cuda-12.1-win-x64-part10/2.2.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE-LIBTORCH.txt",
+        "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part10.props",
+        "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part10.targets",
+        "lib/netstandard2.0/_._/empty.txt",
+        "libtorch-cuda-12.1-win-x64-part10.2.2.1.1.nupkg.sha512",
+        "libtorch-cuda-12.1-win-x64-part10.nuspec",
+        "runtimes/win-x64/native/cufft64_11.dll",
+        "runtimes/win-x64/native/cufftw64_11.dll",
+        "runtimes/win-x64/native/cupti64_2023.1.1.dll",
+        "runtimes/win-x64/native/curand64_10.dll"
+      ]
+    },
+    "libtorch-cuda-12.1-win-x64-part2/2.2.1.1": {
+      "sha512": "OcnU8im9yaNVY7aaCLPw8olPNsjW/WEwR8h2ZY/qLgGsXBtGxzfan+2xewgt+JnBclmaNdCZjKTNlQl+53ZxFQ==",
+      "type": "package",
+      "path": "libtorch-cuda-12.1-win-x64-part2/2.2.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE-LIBTORCH.txt",
+        "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part2.props",
+        "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part2.targets",
+        "lib/netstandard2.0/_._/empty.txt",
+        "libtorch-cuda-12.1-win-x64-part2.2.2.1.1.nupkg.sha512",
+        "libtorch-cuda-12.1-win-x64-part2.nuspec",
+        "runtimes/win-x64/native/cudnn_adv_infer64_8.dll",
+        "runtimes/win-x64/native/cudnn_adv_train64_8.dll"
+      ]
+    },
+    "libtorch-cuda-12.1-win-x64-part3-fragment1/2.2.1.1": {
+      "sha512": "AJbZauBUa/H40PdfMRPURtgAK/UAXoC15zsYW0Rh1tN6U5LRny/LzU+B9rOCHFajHwgU/E/WjVqWJhybR5dumw==",
+      "type": "package",
+      "path": "libtorch-cuda-12.1-win-x64-part3-fragment1/2.2.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE-LIBTORCH.txt",
+        "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part3-fragment1.props",
+        "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part3-fragment1.targets",
+        "lib/netstandard2.0/_._/empty.txt",
+        "libtorch-cuda-12.1-win-x64-part3-fragment1.2.2.1.1.nupkg.sha512",
+        "libtorch-cuda-12.1-win-x64-part3-fragment1.nuspec"
+      ]
+    },
+    "libtorch-cuda-12.1-win-x64-part3-primary/2.2.1.1": {
+      "sha512": "FZFdU5C1CgfJXy/Z07aVJzxF0so3c6MBLiibP4x+6GbXUt/gdZAQPfAQDs3U5eLX0R7OcIVBZcz+ib4QjoA+cA==",
+      "type": "package",
+      "path": "libtorch-cuda-12.1-win-x64-part3-primary/2.2.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE-LIBTORCH.txt",
+        "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part3-primary.props",
+        "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part3-primary.targets",
+        "lib/netstandard2.0/_._/empty.txt",
+        "libtorch-cuda-12.1-win-x64-part3-primary.2.2.1.1.nupkg.sha512",
+        "libtorch-cuda-12.1-win-x64-part3-primary.nuspec",
+        "runtimes/win-x64/native/cudnn_cnn_infer64_8.dll",
+        "runtimes/win-x64/native/cudnn_cnn_infer64_8.dll.sha"
+      ]
+    },
+    "libtorch-cuda-12.1-win-x64-part4/2.2.1.1": {
+      "sha512": "AvVKciGKmsKGXD+hEYe+nrBSjWdGT1XIILEHAPswyJtVscER1aoz+CySYxhkaWIWrsI354W7nUZwxcCiKu3dWQ==",
+      "type": "package",
+      "path": "libtorch-cuda-12.1-win-x64-part4/2.2.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE-LIBTORCH.txt",
+        "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part4.props",
+        "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part4.targets",
+        "lib/netstandard2.0/_._/empty.txt",
+        "libtorch-cuda-12.1-win-x64-part4.2.2.1.1.nupkg.sha512",
+        "libtorch-cuda-12.1-win-x64-part4.nuspec",
+        "runtimes/win-x64/native/cudnn_cnn_train64_8.dll",
+        "runtimes/win-x64/native/cudnn_ops_infer64_8.dll",
+        "runtimes/win-x64/native/cudnn_ops_train64_8.dll"
+      ]
+    },
+    "libtorch-cuda-12.1-win-x64-part5-fragment1/2.2.1.1": {
+      "sha512": "x6MF6VfuqXiPhfAKld91fSnaX3V/p9MWTIvMbmzyC7MIpF+uCvKMCuVEhgC0aeIlFEkPCNq7KAY9zxYPrWVLEw==",
+      "type": "package",
+      "path": "libtorch-cuda-12.1-win-x64-part5-fragment1/2.2.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE-LIBTORCH.txt",
+        "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part5-fragment1.props",
+        "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part5-fragment1.targets",
+        "lib/netstandard2.0/_._/empty.txt",
+        "libtorch-cuda-12.1-win-x64-part5-fragment1.2.2.1.1.nupkg.sha512",
+        "libtorch-cuda-12.1-win-x64-part5-fragment1.nuspec"
+      ]
+    },
+    "libtorch-cuda-12.1-win-x64-part5-primary/2.2.1.1": {
+      "sha512": "qdOSsyO6F+XLhS6OMd/oMeQc0s41NUKeluMelyX5+bj6btOnQy/KshWdUqDI+KpjY2zG/FOwNKBMNjf3/KFT5Q==",
+      "type": "package",
+      "path": "libtorch-cuda-12.1-win-x64-part5-primary/2.2.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE-LIBTORCH.txt",
+        "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part5-primary.props",
+        "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part5-primary.targets",
+        "lib/netstandard2.0/_._/empty.txt",
+        "libtorch-cuda-12.1-win-x64-part5-primary.2.2.1.1.nupkg.sha512",
+        "libtorch-cuda-12.1-win-x64-part5-primary.nuspec",
+        "runtimes/win-x64/native/cublasLt64_12.dll",
+        "runtimes/win-x64/native/cublasLt64_12.dll.sha"
+      ]
+    },
+    "libtorch-cuda-12.1-win-x64-part6/2.2.1.1": {
+      "sha512": "08Bsxlwp2I7K0oKgwDUC+Y6M55Nge8Pa7z9/gvRHrM5nv4stSWUN3V7t8WVeZfiSqj0iXeLNlP3eynt6qBiRzg==",
+      "type": "package",
+      "path": "libtorch-cuda-12.1-win-x64-part6/2.2.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE-LIBTORCH.txt",
+        "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part6.props",
+        "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part6.targets",
+        "lib/netstandard2.0/_._/empty.txt",
+        "libtorch-cuda-12.1-win-x64-part6.2.2.1.1.nupkg.sha512",
+        "libtorch-cuda-12.1-win-x64-part6.nuspec",
+        "runtimes/win-x64/native/cusolver64_11.dll",
+        "runtimes/win-x64/native/cusolverMg64_11.dll",
+        "runtimes/win-x64/native/fbgemm.dll",
+        "runtimes/win-x64/native/fbjni.dll",
+        "runtimes/win-x64/native/libiomp5md.dll",
+        "runtimes/win-x64/native/libiompstubs5md.dll",
+        "runtimes/win-x64/native/nvToolsExt64_1.dll",
+        "runtimes/win-x64/native/nvrtc-builtins64_121.dll"
+      ]
+    },
+    "libtorch-cuda-12.1-win-x64-part7/2.2.1.1": {
+      "sha512": "vBLDVpx5wgCoqSV6ncYTFzJkVwr5/iWJC+y1HliLy5270iOD/lQ2WHNBbqy8YciaRYRYLKOQEha/yMJG542b4g==",
+      "type": "package",
+      "path": "libtorch-cuda-12.1-win-x64-part7/2.2.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE-LIBTORCH.txt",
+        "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part7.props",
+        "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part7.targets",
+        "lib/netstandard2.0/_._/empty.txt",
+        "libtorch-cuda-12.1-win-x64-part7.2.2.1.1.nupkg.sha512",
+        "libtorch-cuda-12.1-win-x64-part7.nuspec",
+        "runtimes/win-x64/native/pytorch_jni.dll",
+        "runtimes/win-x64/native/torch.dll",
+        "runtimes/win-x64/native/torch_cpu.dll"
+      ]
+    },
+    "libtorch-cuda-12.1-win-x64-part8/2.2.1.1": {
+      "sha512": "WTS+eU2qW4B3mkW8dUwisj1wBzg0krMD0fV+Ryq9a6eBqsT2y/NKTL4+567unvwxDaAqJBfC7nLNgVBwLcNgGA==",
+      "type": "package",
+      "path": "libtorch-cuda-12.1-win-x64-part8/2.2.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE-LIBTORCH.txt",
+        "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part8.props",
+        "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part8.targets",
+        "lib/netstandard2.0/_._/empty.txt",
+        "libtorch-cuda-12.1-win-x64-part8.2.2.1.1.nupkg.sha512",
+        "libtorch-cuda-12.1-win-x64-part8.nuspec",
+        "runtimes/win-x64/native/cusparse64_12.dll"
+      ]
+    },
+    "libtorch-cuda-12.1-win-x64-part9-fragment1/2.2.1.1": {
+      "sha512": "ij3t/I+kkVrBFSuB1/S3lNKblHeiLLlyhrgoRwu2m8mAPEJoioHO5H/4sSM0UDp3YRYp31EAlK1e+pkHsCTZiw==",
+      "type": "package",
+      "path": "libtorch-cuda-12.1-win-x64-part9-fragment1/2.2.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE-LIBTORCH.txt",
+        "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part9-fragment1.props",
+        "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part9-fragment1.targets",
+        "lib/netstandard2.0/_._/empty.txt",
+        "libtorch-cuda-12.1-win-x64-part9-fragment1.2.2.1.1.nupkg.sha512",
+        "libtorch-cuda-12.1-win-x64-part9-fragment1.nuspec"
+      ]
+    },
+    "libtorch-cuda-12.1-win-x64-part9-fragment2/2.2.1.1": {
+      "sha512": "cOqLuqdig1+Ra6REXB44Hmou7xL2ZYESxPrTS0MFocwUz1h31Q4YVw4a0YUQpWf/rx8vh26Gb18jRW02/wUlxA==",
+      "type": "package",
+      "path": "libtorch-cuda-12.1-win-x64-part9-fragment2/2.2.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE-LIBTORCH.txt",
+        "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part9-fragment2.props",
+        "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part9-fragment2.targets",
+        "lib/netstandard2.0/_._/empty.txt",
+        "libtorch-cuda-12.1-win-x64-part9-fragment2.2.2.1.1.nupkg.sha512",
+        "libtorch-cuda-12.1-win-x64-part9-fragment2.nuspec"
+      ]
+    },
+    "libtorch-cuda-12.1-win-x64-part9-primary/2.2.1.1": {
+      "sha512": "cgI/G0BZeAoXmYtzOqaSApCDse5iYFk5WPqCcq8vwLV3R2Ag5D5eMKz5eKgjD5d0etJmJzloyYFixXp2rHpC7Q==",
+      "type": "package",
+      "path": "libtorch-cuda-12.1-win-x64-part9-primary/2.2.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE-LIBTORCH.txt",
+        "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part9-primary.props",
+        "buildTransitive/netstandard2.0/libtorch-cuda-12.1-win-x64-part9-primary.targets",
+        "lib/netstandard2.0/_._/empty.txt",
+        "libtorch-cuda-12.1-win-x64-part9-primary.2.2.1.1.nupkg.sha512",
+        "libtorch-cuda-12.1-win-x64-part9-primary.nuspec",
+        "runtimes/win-x64/native/torch_cuda.dll",
+        "runtimes/win-x64/native/torch_cuda.dll.sha"
+      ]
+    },
+    "Newtonsoft.Json/13.0.3": {
+      "sha512": "HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ==",
+      "type": "package",
+      "path": "newtonsoft.json/13.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "README.md",
+        "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.xml",
+        "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.xml",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.xml",
+        "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.xml",
+        "lib/net6.0/Newtonsoft.Json.dll",
+        "lib/net6.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.0/Newtonsoft.Json.dll",
+        "lib/netstandard1.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.3/Newtonsoft.Json.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.xml",
+        "lib/netstandard2.0/Newtonsoft.Json.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.xml",
+        "newtonsoft.json.13.0.3.nupkg.sha512",
+        "newtonsoft.json.nuspec",
+        "packageIcon.png"
+      ]
+    },
+    "SharpZipLib/1.4.0": {
+      "sha512": "CdkbBSPIpHD8xBlu+8kDJiqc1Tf9iV89BObnqcvEbwysXSj5h1MfaeLgeeaxPZmi7CTJO8FDofBBNxBW0Vml7A==",
+      "type": "package",
+      "path": "sharpziplib/1.4.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "images/sharpziplib-nuget-256x256.png",
+        "lib/net6.0/ICSharpCode.SharpZipLib.dll",
+        "lib/net6.0/ICSharpCode.SharpZipLib.pdb",
+        "lib/net6.0/ICSharpCode.SharpZipLib.xml",
+        "lib/netstandard2.0/ICSharpCode.SharpZipLib.dll",
+        "lib/netstandard2.0/ICSharpCode.SharpZipLib.pdb",
+        "lib/netstandard2.0/ICSharpCode.SharpZipLib.xml",
+        "lib/netstandard2.1/ICSharpCode.SharpZipLib.dll",
+        "lib/netstandard2.1/ICSharpCode.SharpZipLib.pdb",
+        "lib/netstandard2.1/ICSharpCode.SharpZipLib.xml",
+        "sharpziplib.1.4.0.nupkg.sha512",
+        "sharpziplib.nuspec"
+      ]
+    },
+    "SkiaSharp/2.88.6": {
+      "sha512": "wdfeBAQrEQCbJIRgAiargzP1Uy+0grZiG4CSgBnhAgcJTsPzlifIaO73JRdwIlT3TyBoeU9jEqzwFUhl4hTYnQ==",
+      "type": "package",
+      "path": "skiasharp/2.88.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "THIRD-PARTY-NOTICES.txt",
+        "interactive-extensions/dotnet/SkiaSharp.DotNet.Interactive.dll",
+        "lib/monoandroid1.0/SkiaSharp.dll",
+        "lib/monoandroid1.0/SkiaSharp.pdb",
+        "lib/monoandroid1.0/SkiaSharp.xml",
+        "lib/net462/SkiaSharp.dll",
+        "lib/net462/SkiaSharp.pdb",
+        "lib/net462/SkiaSharp.xml",
+        "lib/net6.0-android30.0/SkiaSharp.dll",
+        "lib/net6.0-android30.0/SkiaSharp.pdb",
+        "lib/net6.0-android30.0/SkiaSharp.xml",
+        "lib/net6.0-ios13.6/SkiaSharp.dll",
+        "lib/net6.0-ios13.6/SkiaSharp.pdb",
+        "lib/net6.0-ios13.6/SkiaSharp.xml",
+        "lib/net6.0-maccatalyst13.5/SkiaSharp.dll",
+        "lib/net6.0-maccatalyst13.5/SkiaSharp.pdb",
+        "lib/net6.0-maccatalyst13.5/SkiaSharp.xml",
+        "lib/net6.0-macos10.15/SkiaSharp.dll",
+        "lib/net6.0-macos10.15/SkiaSharp.pdb",
+        "lib/net6.0-macos10.15/SkiaSharp.xml",
+        "lib/net6.0-tizen7.0/SkiaSharp.dll",
+        "lib/net6.0-tizen7.0/SkiaSharp.pdb",
+        "lib/net6.0-tizen7.0/SkiaSharp.xml",
+        "lib/net6.0-tvos13.4/SkiaSharp.dll",
+        "lib/net6.0-tvos13.4/SkiaSharp.pdb",
+        "lib/net6.0-tvos13.4/SkiaSharp.xml",
+        "lib/net6.0/SkiaSharp.dll",
+        "lib/net6.0/SkiaSharp.pdb",
+        "lib/net6.0/SkiaSharp.xml",
+        "lib/netcoreapp3.1/SkiaSharp.dll",
+        "lib/netcoreapp3.1/SkiaSharp.pdb",
+        "lib/netcoreapp3.1/SkiaSharp.xml",
+        "lib/netstandard1.3/SkiaSharp.dll",
+        "lib/netstandard1.3/SkiaSharp.pdb",
+        "lib/netstandard1.3/SkiaSharp.xml",
+        "lib/netstandard2.0/SkiaSharp.dll",
+        "lib/netstandard2.0/SkiaSharp.pdb",
+        "lib/netstandard2.0/SkiaSharp.xml",
+        "lib/netstandard2.1/SkiaSharp.dll",
+        "lib/netstandard2.1/SkiaSharp.pdb",
+        "lib/netstandard2.1/SkiaSharp.xml",
+        "lib/tizen40/SkiaSharp.dll",
+        "lib/tizen40/SkiaSharp.pdb",
+        "lib/tizen40/SkiaSharp.xml",
+        "lib/uap10.0.10240/SkiaSharp.dll",
+        "lib/uap10.0.10240/SkiaSharp.pdb",
+        "lib/uap10.0.10240/SkiaSharp.xml",
+        "lib/uap10.0.16299/SkiaSharp.dll",
+        "lib/uap10.0.16299/SkiaSharp.pdb",
+        "lib/uap10.0.16299/SkiaSharp.xml",
+        "lib/xamarinios1.0/SkiaSharp.dll",
+        "lib/xamarinios1.0/SkiaSharp.pdb",
+        "lib/xamarinios1.0/SkiaSharp.xml",
+        "lib/xamarinmac2.0/SkiaSharp.dll",
+        "lib/xamarinmac2.0/SkiaSharp.pdb",
+        "lib/xamarinmac2.0/SkiaSharp.xml",
+        "lib/xamarintvos1.0/SkiaSharp.dll",
+        "lib/xamarintvos1.0/SkiaSharp.pdb",
+        "lib/xamarintvos1.0/SkiaSharp.xml",
+        "lib/xamarinwatchos1.0/SkiaSharp.dll",
+        "lib/xamarinwatchos1.0/SkiaSharp.pdb",
+        "lib/xamarinwatchos1.0/SkiaSharp.xml",
+        "skiasharp.2.88.6.nupkg.sha512",
+        "skiasharp.nuspec"
+      ]
+    },
+    "SkiaSharp.NativeAssets.Linux.NoDependencies/2.88.6": {
+      "sha512": "ecgMclPor+X1wi2dZSVDo1sV2Dm8gwEKNRtS+qiE9qfnQzGHbYWlbTBWalnZBaIl3BLC21b1QO8gMgabhSAh+g==",
+      "type": "package",
+      "path": "skiasharp.nativeassets.linux.nodependencies/2.88.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "THIRD-PARTY-NOTICES.txt",
+        "build/net462/SkiaSharp.NativeAssets.Linux.NoDependencies.targets",
+        "buildTransitive/net462/SkiaSharp.NativeAssets.Linux.NoDependencies.targets",
+        "lib/net462/_._",
+        "lib/net6.0/_._",
+        "lib/netcoreapp3.1/_._",
+        "lib/netstandard1.3/_._",
+        "runtimes/linux-arm/native/libSkiaSharp.so",
+        "runtimes/linux-arm64/native/libSkiaSharp.so",
+        "runtimes/linux-musl-x64/native/libSkiaSharp.so",
+        "runtimes/linux-x64/native/libSkiaSharp.so",
+        "skiasharp.nativeassets.linux.nodependencies.2.88.6.nupkg.sha512",
+        "skiasharp.nativeassets.linux.nodependencies.nuspec"
+      ]
+    },
+    "SkiaSharp.NativeAssets.macOS/2.88.6": {
+      "sha512": "Sko9LFxRXSjb3OGh5/RxrVRXxYo48tr5NKuuSy6jB85GrYt8WRqVY1iLOLwtjPiVAt4cp+pyD4i30azanS64dw==",
+      "type": "package",
+      "path": "skiasharp.nativeassets.macos/2.88.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "THIRD-PARTY-NOTICES.txt",
+        "build/net462/SkiaSharp.NativeAssets.macOS.targets",
+        "build/net6.0-macos10.15/SkiaSharp.NativeAssets.macOS.targets",
+        "build/xamarinmac2.0/SkiaSharp.NativeAssets.macOS.targets",
+        "buildTransitive/net462/SkiaSharp.NativeAssets.macOS.targets",
+        "buildTransitive/net6.0-macos10.15/SkiaSharp.NativeAssets.macOS.targets",
+        "buildTransitive/xamarinmac2.0/SkiaSharp.NativeAssets.macOS.targets",
+        "lib/net462/_._",
+        "lib/net6.0-macos10.15/_._",
+        "lib/net6.0/_._",
+        "lib/netcoreapp3.1/_._",
+        "lib/netstandard1.3/_._",
+        "lib/xamarinmac2.0/_._",
+        "runtimes/osx/native/libSkiaSharp.dylib",
+        "skiasharp.nativeassets.macos.2.88.6.nupkg.sha512",
+        "skiasharp.nativeassets.macos.nuspec"
+      ]
+    },
+    "SkiaSharp.NativeAssets.Win32/2.88.6": {
+      "sha512": "7TzFO0u/g2MpQsTty4fyCDdMcfcWI+aLswwfnYXr3gtNS6VLKdMXPMeKpJa3pJSLnUBN6wD0JjuCe8OoLBQ6cQ==",
+      "type": "package",
+      "path": "skiasharp.nativeassets.win32/2.88.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "THIRD-PARTY-NOTICES.txt",
+        "build/net462/SkiaSharp.NativeAssets.Win32.targets",
+        "buildTransitive/net462/SkiaSharp.NativeAssets.Win32.targets",
+        "lib/net462/_._",
+        "lib/net6.0/_._",
+        "lib/netcoreapp3.1/_._",
+        "lib/netstandard1.3/_._",
+        "runtimes/win-arm64/native/libSkiaSharp.dll",
+        "runtimes/win-x64/native/libSkiaSharp.dll",
+        "runtimes/win-x86/native/libSkiaSharp.dll",
+        "skiasharp.nativeassets.win32.2.88.6.nupkg.sha512",
+        "skiasharp.nativeassets.win32.nuspec"
+      ]
+    },
+    "System.Memory/4.5.5": {
+      "sha512": "XIWiDvKPXaTveaB7HVganDlOCRoj03l+jrwNvcge/t8vhGYKvqV+dMv6G4SAX2NoNmN0wZfVPTAlFwZcZvVOUw==",
+      "type": "package",
+      "path": "system.memory/4.5.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/System.Memory.dll",
+        "lib/net461/System.Memory.xml",
+        "lib/netcoreapp2.1/_._",
+        "lib/netstandard1.1/System.Memory.dll",
+        "lib/netstandard1.1/System.Memory.xml",
+        "lib/netstandard2.0/System.Memory.dll",
+        "lib/netstandard2.0/System.Memory.xml",
+        "ref/netcoreapp2.1/_._",
+        "system.memory.4.5.5.nupkg.sha512",
+        "system.memory.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
+    "TorchSharp/0.102.6": {
+      "sha512": "blYHAp+V0NuVaz01Lt4cLFt9jW463sREs8aEvDwKLLtjdnmqi/dixv5qEx/VE661azgQTHQjHwdxu3Kv+xGuug==",
+      "type": "package",
+      "path": "torchsharp/0.102.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "buildTransitive/net6.0/TorchSharp.props",
+        "buildTransitive/net6.0/TorchSharp.targets",
+        "lib/net6.0/TorchSharp.dll",
+        "lib/net6.0/TorchSharp.xml",
+        "lib/netstandard2.0/TorchSharp.dll",
+        "lib/netstandard2.0/TorchSharp.xml",
+        "runtimes/linux-x64/native/libLibTorchSharp.so",
+        "runtimes/osx-arm64/native/libLibTorchSharp.dylib",
+        "runtimes/osx-x64/native/libLibTorchSharp.dylib",
+        "runtimes/win-x64/native/LibTorchSharp.dll",
+        "torchsharp.0.102.6.nupkg.sha512",
+        "torchsharp.nuspec"
+      ]
+    },
+    "TorchSharp-cuda-windows/0.102.6": {
+      "sha512": "l9yjoPQ9CRMAtKEeYBnvmCMaNUY66+gunn+gZP6L7s8SyQCUeELuxln5YQYzOoMzg+KHu6lc0D6YB54972PcQQ==",
+      "type": "package",
+      "path": "torchsharp-cuda-windows/0.102.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE-LIBTORCH.txt",
+        "LICENSE.txt",
+        "buildTransitive/net6.0/TorchSharp-cuda-windows.props",
+        "buildTransitive/net6.0/TorchSharp-cuda-windows.targets",
+        "buildTransitive/netstandard2.0/TorchSharp-cuda-windows.props",
+        "buildTransitive/netstandard2.0/TorchSharp-cuda-windows.targets",
+        "lib/net6.0/_._/empty.txt",
+        "lib/netstandard2.0/_._/empty.txt",
+        "torchsharp-cuda-windows.0.102.6.nupkg.sha512",
+        "torchsharp-cuda-windows.nuspec"
+      ]
+    },
+    "TorchVision/0.102.6": {
+      "sha512": "rn0nxezU1FzgRUN8xc7bY9sC+a7Sy1ZTXQ8eonYF0CSWDW2d74/IMAYx2wJ+Up7Ew8Yifobagj/Kp37YBQuSKQ==",
+      "type": "package",
+      "path": "torchvision/0.102.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "buildTransitive/net6.0/TorchVision.props",
+        "buildTransitive/net6.0/TorchVision.targets",
+        "buildTransitive/netstandard2.0/TorchVision.props",
+        "buildTransitive/netstandard2.0/TorchVision.targets",
+        "lib/net6.0/TorchVision.dll",
+        "lib/net6.0/TorchVision.xml",
+        "lib/net6.0/_._/empty.txt",
+        "lib/netstandard2.0/TorchVision.dll",
+        "lib/netstandard2.0/TorchVision.xml",
+        "lib/netstandard2.0/_._/empty.txt",
+        "torchvision.0.102.6.nupkg.sha512",
+        "torchvision.nuspec"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net6.0": [
+      "Newtonsoft.Json >= 13.0.3",
+      "TorchSharp-cuda-windows >= 0.102.6",
+      "TorchVision >= 0.102.6"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\Administrator\\.nuget\\packages\\": {},
+    "C:\\Program Files\\DevExpress 23.1\\Components\\Offline Packages": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "D:\\DeepLearning\\TorchSharp\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp.csproj",
+      "projectName": "StableDiffusionTorchSharp",
+      "projectPath": "D:\\DeepLearning\\TorchSharp\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp.csproj",
+      "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+      "outputPath": "D:\\DeepLearning\\TorchSharp\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\DevExpress 23.1\\Components\\Offline Packages",
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 23.1.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net6.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\DevExpress 23.1\\Components\\System\\Components\\Packages": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      }
+    },
+    "frameworks": {
+      "net6.0": {
+        "targetAlias": "net6.0",
+        "dependencies": {
+          "Newtonsoft.Json": {
+            "target": "Package",
+            "version": "[13.0.3, )"
+          },
+          "TorchSharp-cuda-windows": {
+            "target": "Package",
+            "version": "[0.102.6, )"
+          },
+          "TorchVision": {
+            "target": "Package",
+            "version": "[0.102.6, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
