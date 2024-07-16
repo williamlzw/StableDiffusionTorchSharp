@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "gRAvSuTZY4SupTo4feMAhTuKHiyZs8j+LjAOyVLUEGepaSyHSonjQaxC2aqmSrZKshMIyUGvFn+aYXZoml2Xlw==",
+  "dgSpecHash": "Oa6+kPzThl7KGADBaZsWUK4jernKUqfpGjVCbUWBvAGsSrKFI/gaf0QxQNw11CToR2iYvUi+CIFFmFmuZA8WqQ==",
   "success": true,
-  "projectFilePath": "D:\\DeepLearning\\TorchSharp\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp.csproj",
+  "projectFilePath": "D:\\DeepLearning\\TorchSharp\\StableDiffusionTorchSharp - 副本\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Administrator\\.nuget\\packages\\google.protobuf\\3.21.9\\google.protobuf.3.21.9.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\libtorch-cuda-12.1-win-x64\\2.2.1.1\\libtorch-cuda-12.1-win-x64.2.2.1.1.nupkg.sha512",

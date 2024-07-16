@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\DeepLearning\\TorchSharp\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp.csproj": {}
+    "D:\\DeepLearning\\TorchSharp\\StableDiffusionTorchSharp - 副本\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp.csproj": {}
   },
   "projects": {
-    "D:\\DeepLearning\\TorchSharp\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp.csproj": {
+    "D:\\DeepLearning\\TorchSharp\\StableDiffusionTorchSharp - 副本\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\DeepLearning\\TorchSharp\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp.csproj",
+        "projectUniqueName": "D:\\DeepLearning\\TorchSharp\\StableDiffusionTorchSharp - 副本\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp.csproj",
         "projectName": "StableDiffusionTorchSharp",
-        "projectPath": "D:\\DeepLearning\\TorchSharp\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp.csproj",
+        "projectPath": "D:\\DeepLearning\\TorchSharp\\StableDiffusionTorchSharp - 副本\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp.csproj",
         "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "D:\\DeepLearning\\TorchSharp\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp\\obj\\",
+        "outputPath": "D:\\DeepLearning\\TorchSharp\\StableDiffusionTorchSharp - 副本\\StableDiffusionTorchSharp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\DevExpress 23.1\\Components\\Offline Packages",
