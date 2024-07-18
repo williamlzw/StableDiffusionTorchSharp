@@ -1,5 +1,6 @@
 ﻿using TorchSharp;
 using static TorchSharp.torch;
+using Microsoft.ML.Tokenizers;
 
 namespace StableDiffusionTorchSharp
 {
@@ -17,40 +18,57 @@ namespace StableDiffusionTorchSharp
             return torch.cat(new Tensor[] { torch.cos(x), torch.sin(x) }, dim: -1);
         }
 
+        public static List<int> Tokenize(Tokenizer tokenizer, string text, int maxTokens = 77)
+        {
+            int startToken = 49406;
+            int endToken = 49407;
+            var res = tokenizer.Encode(text);
+            var tokens = new [] { startToken }.Concat(res.Ids.Concat(Enumerable.Repeat(0, maxTokens - res.Ids.Count - 2))).Concat(new[] { endToken }).ToArray();
+            return new List<int>(tokens);
+        }
+
         public static void Generate()
         {
             using (torch.no_grad())
             {
                 int num_inference_steps = 15;
-                var device = torch.device("cpu");
+                var device = torch.device("cuda");
                 torchvision.io.DefaultImager = new torchvision.io.SkiaImager(100);
                 var clip = new CLIP();
-                clip.load("model\\clip.dat");
+                clip.load(@".\\model\\clip.dat");
                 clip.eval();
 
-                string VocabPath = "model\\vocab.json";
-                string MergesPath = "model\\merges.txt";
-                var tokenizer = new Tokenizer(VocabPath, MergesPath);
+                var diffusion = new Diffusion();
+                diffusion.load(@".\\model\\unet.dat").to(device);
+                diffusion.eval();
+
+                var decoder = new Decoder();
+                decoder.load(@".\\model\\decoder.dat");
+                decoder.eval();
+
+                string VocabPath = @".\\model\\vocab.json";
+                string MergesPath = @".\\model\\merges.txt";
+                //var tokenizera = new TokenizerCustom(VocabPath, MergesPath);//custom Tokenizer
+                var tokenizer = new Tokenizer(new Bpe(VocabPath, MergesPath, endOfWordSuffix: "</w>"));
 
                 string prompt = "typographic art bird. stylized, intricate, detailed, artistic, text-based";
                 string uncond_prompts = "";
 
-                var cond_tokens_ids = tokenizer.Encode(prompt);
+                var cond_tokens_ids = Tokenize(tokenizer, prompt);
+                //var cond_tokens_idsa = tokenizera.Encode(prompt);//custom Tokenizer
                 var cond_tokens = torch.tensor(cond_tokens_ids, torch.@long).unsqueeze(0);
                 var cond_context = clip.forward(cond_tokens);
 
-                var uncond_tokens_ids = tokenizer.Encode(uncond_prompts);
+                var uncond_tokens_ids = Tokenize(tokenizer, uncond_prompts);
                 var uncond_tokens = torch.tensor(uncond_tokens_ids, torch.@long).unsqueeze(0);
                 var uncond_context = clip.forward(uncond_tokens);
 
                 var context = torch.cat(new Tensor[] { cond_context, uncond_context }).to(device);
 
-                torch.save(context, "context.dat");
+                //torch.save(context, "context.dat");
                 //var context = torch.load("context.dat");
 
-                var diffusion = new Diffusion();
-                diffusion.load("model\\unet.dat").to(device);
-                diffusion.eval();
+                
                 long[] noise_shape = new long[] { 1, 4, 64, 64 };
                 var latents = torch.randn(noise_shape, device: device);
                 var sampler = new EulerDiscreteScheduler();
@@ -71,20 +89,15 @@ namespace StableDiffusionTorchSharp
                     var output_uncond = ret[1];
                     output = 7.5 * (output_cond - output_uncond) + output_uncond;
                     latents = sampler.Step(output, timestep, latents);
-                    torch.save(latents, $"latent{i}.dat");
                     Console.WriteLine($"end step, {i}");
                 }
 
-                //var latents = torch.load("latent14.dat");
-                var decoder = new Decoder();
-                decoder.load("model\\decoder.dat");
-                decoder.eval();
                 Console.WriteLine($"begin decoder");
                 var images = decoder.forward(latents.cpu());
                 Console.WriteLine($"end decoder");
                 images = images.clip(-1, 1) * 0.5 + 0.5;
                 images = torchvision.transforms.functional.convert_image_dtype(images, torch.ScalarType.Byte);
-                torchvision.io.write_jpeg(images, "result1.jpg");
+                torchvision.io.write_jpeg(images, "result.jpg");
             }
         }
     }
