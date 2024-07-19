@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace StableDiffusionTorchSharp
 {
-    public class Tokenizer
+    public class TokenizerCustom
     {
         private IReadOnlyDictionary<string, int> _encoder;
         private IReadOnlyDictionary<int, string> _decoder;
@@ -18,7 +18,7 @@ namespace StableDiffusionTorchSharp
         private int _maxLength;
         private Regex _chunk_pattern;
 
-        public Tokenizer(string vocabPath, string mergesPath)
+        public TokenizerCustom(string vocabPath, string mergesPath)
         {
             var str = File.ReadAllText(vocabPath);
             _encoder = (Dictionary<string, int>)JsonSerializer.Deserialize(str, typeof(Dictionary<string, int>));

@@ -8,9 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="TorchSharp-cuda-windows" Version="0.102.6" />
-    <PackageReference Include="TorchVision" Version="0.102.6" />
+    <PackageReference Include="Microsoft.ML" Version="3.0.1" />
+    <PackageReference Include="Microsoft.ML.Tokenizers" Version="0.21.1" />
+    <PackageReference Include="TorchSharp-cuda-windows" Version="0.102.7" />
+    <PackageReference Include="TorchVision" Version="0.102.7" />
   </ItemGroup>
 
 </Project>
