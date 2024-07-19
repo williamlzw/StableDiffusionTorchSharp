@@ -35,6 +35,7 @@ namespace StableDiffusionTorchSharp
 		internal readonly GroupNorm groupnorm_merged;
 		internal readonly Conv2d conv_merged;
 		internal readonly Module<Tensor, Tensor> residual_layer;
+		internal readonly bool identity;
 
 		public ResidualBlock(long in_channels, long out_channels, long n_time = 1280) : base("ResidualBlock")
 		{
@@ -43,6 +44,7 @@ namespace StableDiffusionTorchSharp
 			linear_time = Linear(n_time, out_channels);
 			groupnorm_merged = GroupNorm(32, out_channels);
 			conv_merged = Conv2d(out_channels, out_channels, kernelSize: 3, padding: 1);
+			identity = (in_channels == out_channels);
 			if (in_channels == out_channels)
 			{
 				residual_layer = nn.Identity();
@@ -363,13 +365,13 @@ namespace StableDiffusionTorchSharp
 			ModelLoader.LoadData.LoadResidualBlock(modelLoader, tensors, (ResidualBlock)unet.encoders[2][0], "model.diffusion_model.input_blocks.2.0");
 			ModelLoader.LoadData.LoadAttentionBlock(modelLoader, tensors, (AttentionBlock)unet.encoders[2][1], "model.diffusion_model.input_blocks.2.1");
 
-			ModelLoader.LoadData.LoadResidualBlock(modelLoader, tensors, (ResidualBlock)unet.encoders[4][0], "model.diffusion_model.input_blocks.4.0", false);
+			ModelLoader.LoadData.LoadResidualBlock(modelLoader, tensors, (ResidualBlock)unet.encoders[4][0], "model.diffusion_model.input_blocks.4.0");
 			ModelLoader.LoadData.LoadAttentionBlock(modelLoader, tensors, (AttentionBlock)unet.encoders[4][1], "model.diffusion_model.input_blocks.4.1");
 
 			ModelLoader.LoadData.LoadResidualBlock(modelLoader, tensors, (ResidualBlock)unet.encoders[5][0], "model.diffusion_model.input_blocks.5.0");
 			ModelLoader.LoadData.LoadAttentionBlock(modelLoader, tensors, (AttentionBlock)unet.encoders[5][1], "model.diffusion_model.input_blocks.5.1");
 
-			ModelLoader.LoadData.LoadResidualBlock(modelLoader, tensors, (ResidualBlock)unet.encoders[7][0], "model.diffusion_model.input_blocks.7.0", false);
+			ModelLoader.LoadData.LoadResidualBlock(modelLoader, tensors, (ResidualBlock)unet.encoders[7][0], "model.diffusion_model.input_blocks.7.0");
 			ModelLoader.LoadData.LoadAttentionBlock(modelLoader, tensors, (AttentionBlock)unet.encoders[7][1], "model.diffusion_model.input_blocks.7.1");
 
 			ModelLoader.LoadData.LoadResidualBlock(modelLoader, tensors, (ResidualBlock)unet.encoders[8][0], "model.diffusion_model.input_blocks.8.0");
@@ -388,49 +390,49 @@ namespace StableDiffusionTorchSharp
 
 			// Load decoders 
 
-			ModelLoader.LoadData.LoadResidualBlock(modelLoader, tensors, (ResidualBlock)unet.decoders[0][0], "model.diffusion_model.output_blocks.0.0", false);
+			ModelLoader.LoadData.LoadResidualBlock(modelLoader, tensors, (ResidualBlock)unet.decoders[0][0], "model.diffusion_model.output_blocks.0.0");
 
-			ModelLoader.LoadData.LoadResidualBlock(modelLoader, tensors, (ResidualBlock)unet.decoders[1][0], "model.diffusion_model.output_blocks.1.0", false);
+			ModelLoader.LoadData.LoadResidualBlock(modelLoader, tensors, (ResidualBlock)unet.decoders[1][0], "model.diffusion_model.output_blocks.1.0");
 
-			ModelLoader.LoadData.LoadResidualBlock(modelLoader, tensors, (ResidualBlock)unet.decoders[2][0], "model.diffusion_model.output_blocks.2.0", false);
+			ModelLoader.LoadData.LoadResidualBlock(modelLoader, tensors, (ResidualBlock)unet.decoders[2][0], "model.diffusion_model.output_blocks.2.0");
 			data = modelLoader.ReadByteFromFile(tensors.First(a => a.Name == "model.diffusion_model.output_blocks.2.1.conv.weight"));
 			((Upsample)unet.decoders[2][1]).conv.weight.bytes = data;
 			data = modelLoader.ReadByteFromFile(tensors.First(a => a.Name == "model.diffusion_model.output_blocks.2.1.conv.bias"));
 			((Upsample)unet.decoders[2][1]).conv.bias.bytes = data;
 
-			ModelLoader.LoadData.LoadResidualBlock(modelLoader, tensors, (ResidualBlock)unet.decoders[3][0], "model.diffusion_model.output_blocks.3.0", false);
+			ModelLoader.LoadData.LoadResidualBlock(modelLoader, tensors, (ResidualBlock)unet.decoders[3][0], "model.diffusion_model.output_blocks.3.0");
 			ModelLoader.LoadData.LoadAttentionBlock(modelLoader, tensors, (AttentionBlock)unet.decoders[3][1], "model.diffusion_model.output_blocks.3.1");
 
-			ModelLoader.LoadData.LoadResidualBlock(modelLoader, tensors, (ResidualBlock)unet.decoders[4][0], "model.diffusion_model.output_blocks.4.0", false);
+			ModelLoader.LoadData.LoadResidualBlock(modelLoader, tensors, (ResidualBlock)unet.decoders[4][0], "model.diffusion_model.output_blocks.4.0");
 			ModelLoader.LoadData.LoadAttentionBlock(modelLoader, tensors, (AttentionBlock)unet.decoders[4][1], "model.diffusion_model.output_blocks.4.1");
 
-			ModelLoader.LoadData.LoadResidualBlock(modelLoader, tensors, (ResidualBlock)unet.decoders[5][0], "model.diffusion_model.output_blocks.5.0", false);
+			ModelLoader.LoadData.LoadResidualBlock(modelLoader, tensors, (ResidualBlock)unet.decoders[5][0], "model.diffusion_model.output_blocks.5.0");
 			ModelLoader.LoadData.LoadAttentionBlock(modelLoader, tensors, (AttentionBlock)unet.decoders[5][1], "model.diffusion_model.output_blocks.5.1");
 			data = modelLoader.ReadByteFromFile(tensors.First(a => a.Name == "model.diffusion_model.output_blocks.5.2.conv.weight"));
 			((Upsample)unet.decoders[5][2]).conv.weight.bytes = data;
 			data = modelLoader.ReadByteFromFile(tensors.First(a => a.Name == "model.diffusion_model.output_blocks.5.2.conv.bias"));
 			((Upsample)unet.decoders[5][2]).conv.bias.bytes = data;
 
-			ModelLoader.LoadData.LoadResidualBlock(modelLoader, tensors, (ResidualBlock)unet.decoders[6][0], "model.diffusion_model.output_blocks.6.0", false);
+			ModelLoader.LoadData.LoadResidualBlock(modelLoader, tensors, (ResidualBlock)unet.decoders[6][0], "model.diffusion_model.output_blocks.6.0");
 			ModelLoader.LoadData.LoadAttentionBlock(modelLoader, tensors, (AttentionBlock)unet.decoders[6][1], "model.diffusion_model.output_blocks.6.1");
 
-			ModelLoader.LoadData.LoadResidualBlock(modelLoader, tensors, (ResidualBlock)unet.decoders[7][0], "model.diffusion_model.output_blocks.7.0", false);
+			ModelLoader.LoadData.LoadResidualBlock(modelLoader, tensors, (ResidualBlock)unet.decoders[7][0], "model.diffusion_model.output_blocks.7.0");
 			ModelLoader.LoadData.LoadAttentionBlock(modelLoader, tensors, (AttentionBlock)unet.decoders[7][1], "model.diffusion_model.output_blocks.7.1");
 
-			ModelLoader.LoadData.LoadResidualBlock(modelLoader, tensors, (ResidualBlock)unet.decoders[8][0], "model.diffusion_model.output_blocks.8.0", false);
+			ModelLoader.LoadData.LoadResidualBlock(modelLoader, tensors, (ResidualBlock)unet.decoders[8][0], "model.diffusion_model.output_blocks.8.0");
 			ModelLoader.LoadData.LoadAttentionBlock(modelLoader, tensors, (AttentionBlock)unet.decoders[8][1], "model.diffusion_model.output_blocks.8.1");
 			data = modelLoader.ReadByteFromFile(tensors.First(a => a.Name == "model.diffusion_model.output_blocks.8.2.conv.weight"));
 			((Upsample)unet.decoders[8][2]).conv.weight.bytes = data;
 			data = modelLoader.ReadByteFromFile(tensors.First(a => a.Name == "model.diffusion_model.output_blocks.8.2.conv.bias"));
 			((Upsample)unet.decoders[8][2]).conv.bias.bytes = data;
 
-			ModelLoader.LoadData.LoadResidualBlock(modelLoader, tensors, (ResidualBlock)unet.decoders[9][0], "model.diffusion_model.output_blocks.9.0", false);
+			ModelLoader.LoadData.LoadResidualBlock(modelLoader, tensors, (ResidualBlock)unet.decoders[9][0], "model.diffusion_model.output_blocks.9.0");
 			ModelLoader.LoadData.LoadAttentionBlock(modelLoader, tensors, (AttentionBlock)unet.decoders[9][1], "model.diffusion_model.output_blocks.9.1");
 
-			ModelLoader.LoadData.LoadResidualBlock(modelLoader, tensors, (ResidualBlock)unet.decoders[10][0], "model.diffusion_model.output_blocks.10.0", false);
+			ModelLoader.LoadData.LoadResidualBlock(modelLoader, tensors, (ResidualBlock)unet.decoders[10][0], "model.diffusion_model.output_blocks.10.0");
 			ModelLoader.LoadData.LoadAttentionBlock(modelLoader, tensors, (AttentionBlock)unet.decoders[10][1], "model.diffusion_model.output_blocks.10.1");
 
-			ModelLoader.LoadData.LoadResidualBlock(modelLoader, tensors, (ResidualBlock)unet.decoders[11][0], "model.diffusion_model.output_blocks.11.0", false);
+			ModelLoader.LoadData.LoadResidualBlock(modelLoader, tensors, (ResidualBlock)unet.decoders[11][0], "model.diffusion_model.output_blocks.11.0");
 			ModelLoader.LoadData.LoadAttentionBlock(modelLoader, tensors, (AttentionBlock)unet.decoders[11][1], "model.diffusion_model.output_blocks.11.1");
 
 			data = modelLoader.ReadByteFromFile(tensors.First(a => a.Name == "model.diffusion_model.out.2.weight"));

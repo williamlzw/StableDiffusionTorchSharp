@@ -4,7 +4,7 @@ namespace StableDiffusionTorchSharp.ModelLoader
 {
 	internal class LoadData
 	{
-		public static void LoadResidualBlock(IModelLoader modelLoader, List<Tensor> tensorlist, ResidualBlock modules, string name, bool Identity = true)
+		public static void LoadResidualBlock(IModelLoader modelLoader, List<Tensor> tensorlist, ResidualBlock modules, string name)
 		{
 			byte[] data = modelLoader.ReadByteFromFile(tensorlist.First(a => a.Name == name + ".in_layers.0.weight"));
 			modules.groupnorm_feature.weight.bytes = data;
@@ -36,7 +36,8 @@ namespace StableDiffusionTorchSharp.ModelLoader
 			data = modelLoader.ReadByteFromFile(tensorlist.First(a => a.Name == name + ".out_layers.3.bias"));
 			modules.conv_merged.bias.bytes = data;
 
-			if (!Identity)
+			
+			if (!modules.identity)
 			{
 				data = modelLoader.ReadByteFromFile(tensorlist.First(a => a.Name == name + ".skip_connection.weight"));
 				((Conv2d)modules.residual_layer).weight.bytes = data;
@@ -136,7 +137,7 @@ namespace StableDiffusionTorchSharp.ModelLoader
 		}
 
 
-		public static void LoadResidualBlockA(IModelLoader modelLoader, List<Tensor> tensorlist, ResidualBlockA modules, string name, bool Identity = true)
+		public static void LoadResidualBlockA(IModelLoader modelLoader, List<Tensor> tensorlist, ResidualBlockA modules, string name)
 		{
 			byte[] data = modelLoader.ReadByteFromFile(tensorlist.First(a => a.Name == name + ".conv1.weight"));
 			modules.conv_1.weight.bytes = data;
@@ -162,7 +163,7 @@ namespace StableDiffusionTorchSharp.ModelLoader
 			data = modelLoader.ReadByteFromFile(tensorlist.First(a => a.Name == name + ".norm2.bias"));
 			modules.groupnorm_2.bias.bytes = data;
 
-			if (!Identity)
+			if (!modules.identity)
 			{
 				data = modelLoader.ReadByteFromFile(tensorlist.First(a => a.Name == name + ".nin_shortcut.weight"));
 				((Conv2d)modules.residual_layer).weight.bytes = data;

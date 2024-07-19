@@ -43,6 +43,7 @@ namespace StableDiffusionTorchSharp
 		internal readonly GroupNorm groupnorm_2;
 		internal readonly Conv2d conv_2;
 		internal readonly Module<Tensor, Tensor> residual_layer;
+		internal readonly bool identity;
 
 		public ResidualBlockA(long in_channels, long out_channels) : base("ResidualBlockA")
 		{
@@ -50,6 +51,7 @@ namespace StableDiffusionTorchSharp
 			conv_1 = Conv2d(in_channels, out_channels, kernelSize: 3, padding: 1);
 			groupnorm_2 = GroupNorm(32, out_channels);
 			conv_2 = Conv2d(out_channels, out_channels, kernelSize: 3, padding: 1);
+			identity = (in_channels == out_channels);
 			if (in_channels == out_channels)
 			{
 				residual_layer = nn.Identity();
@@ -75,6 +77,7 @@ namespace StableDiffusionTorchSharp
 			return output.MoveToOuterDisposeScope();
 		}
 	}
+
 
 	public class Decoder : Sequential
 	{
@@ -111,10 +114,11 @@ namespace StableDiffusionTorchSharp
 			new ResidualBlockA(256, 128),
 			new ResidualBlockA(128, 128),
 			new ResidualBlockA(128, 128),
-			GroupNorm(32, 128),
 
+			GroupNorm(32, 128),
 			SiLU(),
 			Conv2d(128, 3, kernelSize: 3, padding: 1)
+
 			)
 		{
 		}
@@ -145,8 +149,9 @@ namespace StableDiffusionTorchSharp
 
 			List<ModelLoader.Tensor> tensors = modelLoader.ReadTensorsInfoFromFile(filename);
 
+			byte[] data = null;
 
-			byte[] data = modelLoader.ReadByteFromFile(tensors.First(a => a.Name == "first_stage_model.post_quant_conv.weight"));
+			data = modelLoader.ReadByteFromFile(tensors.First(a => a.Name == "first_stage_model.post_quant_conv.weight"));
 			((Conv2d)children().ToArray()[0]).weight.bytes = data;
 
 			data = modelLoader.ReadByteFromFile(tensors.First(a => a.Name == "first_stage_model.post_quant_conv.bias"));
@@ -189,7 +194,7 @@ namespace StableDiffusionTorchSharp
 
 
 			// first_stage_model.decoder.up.1
-			ModelLoader.LoadData.LoadResidualBlockA(modelLoader, tensors, (ResidualBlockA)(children().ToArray()[15]), "first_stage_model.decoder.up.1.block.0", false);
+			ModelLoader.LoadData.LoadResidualBlockA(modelLoader, tensors, (ResidualBlockA)(children().ToArray()[15]), "first_stage_model.decoder.up.1.block.0");
 			ModelLoader.LoadData.LoadResidualBlockA(modelLoader, tensors, (ResidualBlockA)(children().ToArray()[16]), "first_stage_model.decoder.up.1.block.1");
 			ModelLoader.LoadData.LoadResidualBlockA(modelLoader, tensors, (ResidualBlockA)(children().ToArray()[17]), "first_stage_model.decoder.up.1.block.2");
 
@@ -201,7 +206,7 @@ namespace StableDiffusionTorchSharp
 
 
 			// first_stage_model.decoder.up.0
-			ModelLoader.LoadData.LoadResidualBlockA(modelLoader, tensors, (ResidualBlockA)(children().ToArray()[20]), "first_stage_model.decoder.up.0.block.0", false);
+			ModelLoader.LoadData.LoadResidualBlockA(modelLoader, tensors, (ResidualBlockA)(children().ToArray()[20]), "first_stage_model.decoder.up.0.block.0");
 			ModelLoader.LoadData.LoadResidualBlockA(modelLoader, tensors, (ResidualBlockA)(children().ToArray()[21]), "first_stage_model.decoder.up.0.block.1");
 			ModelLoader.LoadData.LoadResidualBlockA(modelLoader, tensors, (ResidualBlockA)(children().ToArray()[22]), "first_stage_model.decoder.up.0.block.2");
 

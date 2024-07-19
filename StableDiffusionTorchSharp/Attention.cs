@@ -14,17 +14,21 @@ namespace StableDiffusionTorchSharp
 		private readonly long n_heads_;
 		private readonly long d_head;
 		private readonly bool causal_mask_;
+		private readonly Dropout dropout;
+		private readonly float dropout_factor_;
 
-		public SelfAttention(long n_heads, long d_embed, bool causal_mask = false, bool in_proj_bias = true, bool out_proj_bias = true) : base("SelfAttention")
+		public SelfAttention(long n_heads, long embed_dim, bool causal_mask = false, bool in_proj_bias = true, bool out_proj_bias = true, float dropoutProb = 0.1f) : base("SelfAttention")
 		{
-			q_proj = Linear(d_embed, d_embed, in_proj_bias);
-			k_proj = Linear(d_embed, d_embed, in_proj_bias);
-			v_proj = Linear(d_embed, d_embed, in_proj_bias);
-			out_proj = Linear(d_embed, d_embed, out_proj_bias);
+			q_proj = Linear(embed_dim, embed_dim, in_proj_bias);
+			k_proj = Linear(embed_dim, embed_dim, in_proj_bias);
+			v_proj = Linear(embed_dim, embed_dim, in_proj_bias);
+			out_proj = Linear(embed_dim, embed_dim, out_proj_bias);
 
 			n_heads_ = n_heads;
-			d_head = d_embed / n_heads;
+			d_head = embed_dim / n_heads;
 			causal_mask_ = causal_mask;
+			dropout_factor_ = dropoutProb;	
+			dropout = Dropout(dropoutProb);
 			RegisterComponents();
 		}
 
@@ -52,6 +56,10 @@ namespace StableDiffusionTorchSharp
 			}
 			weight = weight / (float)Math.Sqrt(d_head);
 			weight = torch.nn.functional.softmax(weight, dim: -1);
+			if (dropout_factor_ > 0)
+			{
+				weight = dropout.forward(weight);
+			}
 
 			var output = torch.matmul(weight, v);
 			output = output.transpose(1, 2);

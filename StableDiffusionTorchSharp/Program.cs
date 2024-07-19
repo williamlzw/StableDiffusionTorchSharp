@@ -24,6 +24,10 @@ namespace StableDiffusionTorchSharp
 				string modelname = @".\model\sunshinemix_PrunedFp16.safetensors";
 				int num_inference_steps = 15;
 				var device = torch.device("cuda");
+				float cfg = 7.5f;
+				//ulong seed = (ulong)(randn_float() * ulong.MaxValue);
+				ulong seed = 1337;
+
 				torchvision.io.DefaultImager = new torchvision.io.SkiaImager(100);
 
 				Console.WriteLine("Loading clip model......");
@@ -40,7 +44,7 @@ namespace StableDiffusionTorchSharp
 				string MergesPath = @".\model\merges.txt";
 				var tokenizer = new Tokenizer(VocabPath, MergesPath);
 
-				string prompt = "typographic art bird. stylized, intricate, detailed, artistic, text-based";
+				string prompt = "typographic art bird. stylized, intricate, detailed, artistic, text-based.";
 				string uncond_prompts = "";
 
 				var cond_tokens_ids = tokenizer.Encode(prompt);
@@ -64,7 +68,8 @@ namespace StableDiffusionTorchSharp
 				diffusion.eval();
 				Console.WriteLine("Loading diffuson model......");
 				long[] noise_shape = new long[] { 1, 4, 64, 64 };
-				var latents = torch.randn(noise_shape, device: device);
+				Generator generator = new Generator(seed: seed, device: device);
+				var latents = torch.randn(noise_shape, generator: generator).to(device);
 				var sampler = new EulerDiscreteScheduler();
 				Console.WriteLine("Diffuson model loaded");
 
@@ -83,7 +88,7 @@ namespace StableDiffusionTorchSharp
 					var ret = output.chunk(2);
 					var output_cond = ret[0];
 					var output_uncond = ret[1];
-					output = 7.5 * (output_cond - output_uncond) + output_uncond;
+					output = cfg * (output_cond - output_uncond) + output_uncond;
 					latents = sampler.Step(output, timestep, latents);
 					//torch.save(latents, $"latent{i}.dat");
 					Console.WriteLine($"end step, {i}");
