@@ -20,6 +20,5 @@
     <Import Project="$(NuGetPackageRoot)libtorch-cuda-12.1-win-x64\2.2.1.1\buildTransitive\netstandard2.0\libtorch-cuda-12.1-win-x64.targets" Condition="Exists('$(NuGetPackageRoot)libtorch-cuda-12.1-win-x64\2.2.1.1\buildTransitive\netstandard2.0\libtorch-cuda-12.1-win-x64.targets')" />
     <Import Project="$(NuGetPackageRoot)torchsharp-cuda-windows\0.102.7\buildTransitive\net6.0\TorchSharp-cuda-windows.targets" Condition="Exists('$(NuGetPackageRoot)torchsharp-cuda-windows\0.102.7\buildTransitive\net6.0\TorchSharp-cuda-windows.targets')" />
     <Import Project="$(NuGetPackageRoot)system.text.json\6.0.1\build\System.Text.Json.targets" Condition="Exists('$(NuGetPackageRoot)system.text.json\6.0.1\build\System.Text.Json.targets')" />
-    <Import Project="$(NuGetPackageRoot)microsoft.ml\3.0.1\build\netstandard2.0\Microsoft.ML.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.ml\3.0.1\build\netstandard2.0\Microsoft.ML.targets')" />
   </ImportGroup>
 </Project>

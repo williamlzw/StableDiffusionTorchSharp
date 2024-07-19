@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("StableDiffusionTorchSharp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0cd5efaefc159cd4c629dde2258215cf18ae96e3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+05e67854b69512a8fb89631020712be7137d4bee")]
 [assembly: System.Reflection.AssemblyProductAttribute("StableDiffusionTorchSharp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("StableDiffusionTorchSharp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

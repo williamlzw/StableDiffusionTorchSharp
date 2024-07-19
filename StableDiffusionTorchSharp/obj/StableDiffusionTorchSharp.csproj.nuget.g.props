@@ -33,6 +33,5 @@
     <Import Project="$(NuGetPackageRoot)libtorch-cuda-12.1-win-x64-part1\2.2.1.1\buildTransitive\netstandard2.0\libtorch-cuda-12.1-win-x64-part1.props" Condition="Exists('$(NuGetPackageRoot)libtorch-cuda-12.1-win-x64-part1\2.2.1.1\buildTransitive\netstandard2.0\libtorch-cuda-12.1-win-x64-part1.props')" />
     <Import Project="$(NuGetPackageRoot)libtorch-cuda-12.1-win-x64\2.2.1.1\buildTransitive\netstandard2.0\libtorch-cuda-12.1-win-x64.props" Condition="Exists('$(NuGetPackageRoot)libtorch-cuda-12.1-win-x64\2.2.1.1\buildTransitive\netstandard2.0\libtorch-cuda-12.1-win-x64.props')" />
     <Import Project="$(NuGetPackageRoot)torchsharp-cuda-windows\0.102.7\buildTransitive\net6.0\TorchSharp-cuda-windows.props" Condition="Exists('$(NuGetPackageRoot)torchsharp-cuda-windows\0.102.7\buildTransitive\net6.0\TorchSharp-cuda-windows.props')" />
-    <Import Project="$(NuGetPackageRoot)microsoft.ml\3.0.1\build\netstandard2.0\Microsoft.ML.props" Condition="Exists('$(NuGetPackageRoot)microsoft.ml\3.0.1\build\netstandard2.0\Microsoft.ML.props')" />
   </ImportGroup>
 </Project>

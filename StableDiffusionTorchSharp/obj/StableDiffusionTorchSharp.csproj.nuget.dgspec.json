@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\DeepLearning\\TorchSharp\\StableDiffusionTorchSharp - 副本\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp.csproj": {}
+    "D:\\DeepLearning\\TorchSharp\\新建文件夹\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp.csproj": {}
   },
   "projects": {
-    "D:\\DeepLearning\\TorchSharp\\StableDiffusionTorchSharp - 副本\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp.csproj": {
+    "D:\\DeepLearning\\TorchSharp\\新建文件夹\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\DeepLearning\\TorchSharp\\StableDiffusionTorchSharp - 副本\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp.csproj",
+        "projectUniqueName": "D:\\DeepLearning\\TorchSharp\\新建文件夹\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp.csproj",
         "projectName": "StableDiffusionTorchSharp",
-        "projectPath": "D:\\DeepLearning\\TorchSharp\\StableDiffusionTorchSharp - 副本\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp.csproj",
+        "projectPath": "D:\\DeepLearning\\TorchSharp\\新建文件夹\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp.csproj",
         "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "D:\\DeepLearning\\TorchSharp\\StableDiffusionTorchSharp - 副本\\StableDiffusionTorchSharp\\obj\\",
+        "outputPath": "D:\\DeepLearning\\TorchSharp\\新建文件夹\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\DevExpress 23.1\\Components\\Offline Packages",
@@ -52,13 +52,13 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "Microsoft.ML": {
-              "target": "Package",
-              "version": "[3.0.1, )"
-            },
             "Microsoft.ML.Tokenizers": {
               "target": "Package",
               "version": "[0.21.1, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
             },
             "TorchSharp-cuda-windows": {
               "target": "Package",
