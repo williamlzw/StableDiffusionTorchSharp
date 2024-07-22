@@ -1295,11 +1295,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\DeepLearning\\TorchSharp\\新建文件夹\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp.csproj",
+      "projectUniqueName": "D:\\DeepLearning\\TorchSharp\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp.csproj",
       "projectName": "StableDiffusionTorchSharp",
-      "projectPath": "D:\\DeepLearning\\TorchSharp\\新建文件夹\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp.csproj",
+      "projectPath": "D:\\DeepLearning\\TorchSharp\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "D:\\DeepLearning\\TorchSharp\\新建文件夹\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp\\obj\\",
+      "outputPath": "D:\\DeepLearning\\TorchSharp\\StableDiffusionTorchSharp\\StableDiffusionTorchSharp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\DevExpress 23.1\\Components\\Offline Packages",

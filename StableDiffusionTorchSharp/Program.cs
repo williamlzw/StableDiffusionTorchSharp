@@ -1,5 +1,6 @@
 ﻿using Microsoft.ML.Tokenizers;
 using TorchSharp;
+using TorchSharp.Modules;
 using static TorchSharp.torch;
 
 namespace StableDiffusionTorchSharp
@@ -31,35 +32,47 @@ namespace StableDiffusionTorchSharp
 		{
 			using (torch.no_grad())
 			{
-				int num_inference_steps = 15;
+				int num_inference_steps = 20;
 				var device = torch.device("cuda");
 				float cfg = 7.5f;
-				ulong seed = (ulong)(randn_float() * ulong.MaxValue);
+				ulong seed = (ulong)new Random().Next(0, int.MaxValue);
 				string modelname = @".\model\sunshinemix_PrunedFp16.safetensors";
 				torchvision.io.DefaultImager = new torchvision.io.SkiaImager(100);
-				var clip = new CLIP().half();
+
+				Console.WriteLine("Device:" + device);
+				Console.WriteLine("CFG:" + cfg);
+				Console.WriteLine("Seed:" + seed);
+				Console.WriteLine("Loading clip......");
+				var clip = new CLIP();
 				clip.load(modelname);
 				clip = clip.to(device);
 				clip.eval();
 
-				var diffusion = new Diffusion().half();
+				Console.WriteLine("Loading unet......");
+				var diffusion = new Diffusion();
 				diffusion.load(modelname);
 				diffusion = diffusion.to(device);
 				diffusion.eval();
 
-				var decoder = new Decoder().half();
+				Console.WriteLine("Loading vae......");
+				var decoder = new Decoder();
 				decoder.load(modelname);
 				decoder = decoder.to(device);
 				decoder.eval();
 
-				string VocabPath = @".\\model\\vocab.json";
-				string MergesPath = @".\\model\\merges.txt";
+				ScalarType clipType = clip.embedding.token_embedding.weight.dtype;
+				ScalarType diffusionType = diffusion.final.groupnorm.weight.dtype;
+				ScalarType decoderType = ((Conv2d)decoder.children().First()).weight.dtype;
+
+				string VocabPath = @".\model\vocab.json";
+				string MergesPath = @".\model\merges.txt";
 				//var tokenizera = new TokenizerCustom(VocabPath, MergesPath);//custom Tokenizer
 				var tokenizer = new Tokenizer(new Bpe(VocabPath, MergesPath, endOfWordSuffix: "</w>"));
 
 				string prompt = "typographic art bird. stylized, intricate, detailed, artistic, text-based";
 				string uncond_prompts = "";
 
+				Console.WriteLine("Clip is doing......");
 				var cond_tokens_ids = Tokenize(tokenizer, prompt);
 				//var cond_tokens_idsa = tokenizera.Encode(prompt);//custom Tokenizer
 				var cond_tokens = torch.tensor(cond_tokens_ids, torch.@long).unsqueeze(0).to(device);
@@ -69,15 +82,16 @@ namespace StableDiffusionTorchSharp
 				var uncond_tokens = torch.tensor(uncond_tokens_ids, torch.@long).unsqueeze(0).to(device);
 				var uncond_context = clip.forward(uncond_tokens);
 
-				var context = torch.cat(new Tensor[] { cond_context, uncond_context }).to(device);
+				var context = torch.cat(new Tensor[] { cond_context, uncond_context }).to(diffusionType).to(device);
 
 				//torch.save(context, "context.dat");
 				//var context = torch.load("context.dat");
 
-
+				Console.WriteLine("Getting latents......");
 				long[] noise_shape = new long[] { 1, 4, 64, 64 };
 				Generator generator = new Generator(seed, device);
-				var latents = torch.randn(noise_shape, generator: generator).half().to(device);
+				var latents = torch.randn(noise_shape, generator: generator);
+				latents = latents.to(diffusionType).to(device);
 				var sampler = new EulerDiscreteScheduler();
 
 				sampler.SetTimesteps(num_inference_steps, device);
@@ -87,9 +101,9 @@ namespace StableDiffusionTorchSharp
 				{
 					Console.WriteLine($"begin step");
 					var timestep = sampler.timesteps_[i];
-					var time_embedding = GetTimeEnmedding(timestep.ToSingle()).to(device).half();
+					var time_embedding = GetTimeEnmedding(timestep.ToSingle()).to(diffusionType).to(device);
 					var input_latents = sampler.ScaleModelInput(latents, timestep);
-					input_latents = input_latents.repeat(2, 1, 1, 1).to(device);
+					input_latents = input_latents.repeat(2, 1, 1, 1).to(diffusionType).to(device);
 					var output = diffusion.forward(input_latents, context, time_embedding);
 					var ret = output.chunk(2);
 					var output_cond = ret[0];
@@ -99,6 +113,7 @@ namespace StableDiffusionTorchSharp
 					Console.WriteLine($"end step, {i}");
 				}
 
+				latents = latents.to(decoderType);
 				Console.WriteLine($"begin decoder");
 				var images = decoder.forward(latents);
 				Console.WriteLine($"end decoder");
@@ -106,6 +121,7 @@ namespace StableDiffusionTorchSharp
 				images = images.cpu();
 				images = torchvision.transforms.functional.convert_image_dtype(images, torch.ScalarType.Byte);
 				torchvision.io.write_jpeg(images, "result.jpg");
+
 			}
 		}
 	}

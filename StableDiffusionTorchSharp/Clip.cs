@@ -93,6 +93,18 @@ namespace StableDiffusionTorchSharp
 		public override Module load(string filename, bool strict = true, IList<string> skip = null, Dictionary<string, bool> loadedParameters = null)
 		{
 			string extension = Path.GetExtension(filename);
+
+			if (extension.Contains("dat"))
+			{
+				using (FileStream fileStream = new FileStream(filename, FileMode.Open))
+				{
+					using (BinaryReader binaryReader = new BinaryReader(fileStream))
+					{
+						return load(binaryReader, strict, skip, loadedParameters);
+					}
+				}
+			}
+
 			ModelLoader.IModelLoader modelLoader = null;
 			if (extension.Contains("safetensor"))
 			{
@@ -105,7 +117,10 @@ namespace StableDiffusionTorchSharp
 
 			List<ModelLoader.Tensor> tensors = modelLoader.ReadTensorsInfoFromFile(filename);
 
-			byte[] data = modelLoader.ReadByteFromFile(tensors.First(a => a.Name == "cond_stage_model.transformer.text_model.embeddings.token_embedding.weight"));
+			byte[] data;
+			var t = tensors.First(a => a.Name == "cond_stage_model.transformer.text_model.embeddings.token_embedding.weight");
+			this.to(t.Type);
+			data = modelLoader.ReadByteFromFile(tensors.First(a => a.Name == "cond_stage_model.transformer.text_model.embeddings.token_embedding.weight"));
 			embedding.token_embedding.weight.bytes = new Span<byte>(data);
 
 			data = modelLoader.ReadByteFromFile(tensors.First(a => a.Name == "cond_stage_model.transformer.text_model.embeddings.position_embedding.weight"));
@@ -145,23 +160,12 @@ namespace StableDiffusionTorchSharp
 				((CLIPLayer)layers[i]).linear_2.bias.bytes = new Span<byte>(data);
 
 
-				data = modelLoader.ReadByteFromFile(tensors.First(a => a.Name == "cond_stage_model.transformer.text_model.encoder.layers." + i + ".self_attn.k_proj.weight"));
-				((CLIPLayer)layers[i]).attention.k_proj.weight.bytes = new Span<byte>(data);
+				data = modelLoader.ReadByteFromFile(tensors.First(a => a.Name == "cond_stage_model.transformer.text_model.encoder.layers." + i + ".self_attn.q_proj.weight")).Concat(modelLoader.ReadByteFromFile(tensors.First(a => a.Name == "cond_stage_model.transformer.text_model.encoder.layers." + i + ".self_attn.k_proj.weight"))).Concat(modelLoader.ReadByteFromFile(tensors.First(a => a.Name == "cond_stage_model.transformer.text_model.encoder.layers." + i + ".self_attn.v_proj.weight"))).ToArray();
+				((CLIPLayer)layers[i]).attention.in_proj.weight.bytes = data;
 
-				data = modelLoader.ReadByteFromFile(tensors.First(a => a.Name == "cond_stage_model.transformer.text_model.encoder.layers." + i + ".self_attn.k_proj.bias"));
-				((CLIPLayer)layers[i]).attention.k_proj.bias.bytes = new Span<byte>(data);
+				data = modelLoader.ReadByteFromFile(tensors.First(a => a.Name == "cond_stage_model.transformer.text_model.encoder.layers." + i + ".self_attn.q_proj.bias")).Concat(modelLoader.ReadByteFromFile(tensors.First(a => a.Name == "cond_stage_model.transformer.text_model.encoder.layers." + i + ".self_attn.k_proj.bias"))).Concat(modelLoader.ReadByteFromFile(tensors.First(a => a.Name == "cond_stage_model.transformer.text_model.encoder.layers." + i + ".self_attn.v_proj.bias"))).ToArray();
+				((CLIPLayer)layers[i]).attention.in_proj.bias.bytes = data;
 
-				data = modelLoader.ReadByteFromFile(tensors.First(a => a.Name == "cond_stage_model.transformer.text_model.encoder.layers." + i + ".self_attn.q_proj.weight"));
-				((CLIPLayer)layers[i]).attention.q_proj.weight.bytes = new Span<byte>(data);
-
-				data = modelLoader.ReadByteFromFile(tensors.First(a => a.Name == "cond_stage_model.transformer.text_model.encoder.layers." + i + ".self_attn.q_proj.bias"));
-				((CLIPLayer)layers[i]).attention.q_proj.bias.bytes = new Span<byte>(data);
-
-				data = modelLoader.ReadByteFromFile(tensors.First(a => a.Name == "cond_stage_model.transformer.text_model.encoder.layers." + i + ".self_attn.v_proj.weight"));
-				((CLIPLayer)layers[i]).attention.v_proj.weight.bytes = new Span<byte>(data);
-
-				data = modelLoader.ReadByteFromFile(tensors.First(a => a.Name == "cond_stage_model.transformer.text_model.encoder.layers." + i + ".self_attn.v_proj.bias"));
-				((CLIPLayer)layers[i]).attention.v_proj.bias.bytes = new Span<byte>(data);
 
 				data = modelLoader.ReadByteFromFile(tensors.First(a => a.Name == "cond_stage_model.transformer.text_model.encoder.layers." + i + ".self_attn.out_proj.weight"));
 				((CLIPLayer)layers[i]).attention.out_proj.weight.bytes = new Span<byte>(data);

@@ -36,7 +36,7 @@ namespace StableDiffusionTorchSharp.ModelLoader
 			data = modelLoader.ReadByteFromFile(tensorlist.First(a => a.Name == name + ".out_layers.3.bias"));
 			modules.conv_merged.bias.bytes = data;
 
-			
+
 			if (!modules.identity)
 			{
 				data = modelLoader.ReadByteFromFile(tensorlist.First(a => a.Name == name + ".skip_connection.weight"));
@@ -83,14 +83,8 @@ namespace StableDiffusionTorchSharp.ModelLoader
 			modules.layernorm_3.bias.bytes = data;
 
 
-			data = modelLoader.ReadByteFromFile(tensorlist.First(a => a.Name == name + ".transformer_blocks.0.attn1.to_q.weight"));
-			modules.attention_1.q_proj.weight.bytes = data;
-
-			data = modelLoader.ReadByteFromFile(tensorlist.First(a => a.Name == name + ".transformer_blocks.0.attn1.to_k.weight"));
-			modules.attention_1.k_proj.weight.bytes = data;
-
-			data = modelLoader.ReadByteFromFile(tensorlist.First(a => a.Name == name + ".transformer_blocks.0.attn1.to_v.weight"));
-			modules.attention_1.v_proj.weight.bytes = data;
+			data = modelLoader.ReadByteFromFile(tensorlist.First(a => a.Name == name + ".transformer_blocks.0.attn1.to_q.weight")).Concat(modelLoader.ReadByteFromFile(tensorlist.First(a => a.Name == name + ".transformer_blocks.0.attn1.to_k.weight"))).Concat(modelLoader.ReadByteFromFile(tensorlist.First(a => a.Name == name + ".transformer_blocks.0.attn1.to_v.weight"))).ToArray();
+			modules.attention_1.in_proj.weight.bytes = data;
 
 			data = modelLoader.ReadByteFromFile(tensorlist.First(a => a.Name == name + ".transformer_blocks.0.attn1.to_out.0.weight"));
 			modules.attention_1.out_proj.weight.bytes = data;
@@ -183,23 +177,13 @@ namespace StableDiffusionTorchSharp.ModelLoader
 			modules.groupnorm.bias.bytes = data;
 
 
-			data = modelLoader.ReadByteFromFile(tensorlist.First(a => a.Name == name + ".attn_1.q.weight"));
-			modules.attention.q_proj.weight.bytes = data;
 
-			data = modelLoader.ReadByteFromFile(tensorlist.First(a => a.Name == name + ".attn_1.q.bias"));
-			modules.attention.q_proj.bias.bytes = data;
+			data = modelLoader.ReadByteFromFile(tensorlist.First(a => a.Name == name + ".attn_1.q.weight")).Concat(modelLoader.ReadByteFromFile(tensorlist.First(a => a.Name == name + ".attn_1.k.weight"))).Concat(modelLoader.ReadByteFromFile(tensorlist.First(a => a.Name == name + ".attn_1.v.weight"))).ToArray();
+			modules.attention.in_proj.weight.bytes = data;
 
-			data = modelLoader.ReadByteFromFile(tensorlist.First(a => a.Name == name + ".attn_1.k.weight"));
-			modules.attention.k_proj.weight.bytes = data;
+			data = modelLoader.ReadByteFromFile(tensorlist.First(a => a.Name == name + ".attn_1.q.bias")).Concat(modelLoader.ReadByteFromFile(tensorlist.First(a => a.Name == name + ".attn_1.k.bias"))).Concat(modelLoader.ReadByteFromFile(tensorlist.First(a => a.Name == name + ".attn_1.v.bias"))).ToArray();
+			modules.attention.in_proj.bias.bytes = data;
 
-			data = modelLoader.ReadByteFromFile(tensorlist.First(a => a.Name == name + ".attn_1.k.bias"));
-			modules.attention.k_proj.bias.bytes = data;
-
-			data = modelLoader.ReadByteFromFile(tensorlist.First(a => a.Name == name + ".attn_1.v.weight"));
-			modules.attention.v_proj.weight.bytes = data;
-
-			data = modelLoader.ReadByteFromFile(tensorlist.First(a => a.Name == name + ".attn_1.v.bias"));
-			modules.attention.v_proj.bias.bytes = data;
 
 			data = modelLoader.ReadByteFromFile(tensorlist.First(a => a.Name == name + ".attn_1.proj_out.weight"));
 			modules.attention.out_proj.weight.bytes = data;

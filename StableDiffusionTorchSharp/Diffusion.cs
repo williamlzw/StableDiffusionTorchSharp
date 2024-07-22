@@ -280,9 +280,9 @@ namespace StableDiffusionTorchSharp
 
 	public class Diffusion : Module<Tensor, Tensor, Tensor, Tensor>
 	{
-		private readonly TimeEmbedding time_embedding;
-		private readonly UNet unet;
-		private readonly FinalLayer final;
+		internal readonly TimeEmbedding time_embedding;
+		internal readonly UNet unet;
+		internal readonly FinalLayer final;
 
 		public Diffusion() : base("Diffusion")
 		{
@@ -304,6 +304,18 @@ namespace StableDiffusionTorchSharp
 		public override Module load(string filename, bool strict = true, IList<string> skip = null, Dictionary<string, bool> loadedParameters = null)
 		{
 			string extension = Path.GetExtension(filename);
+
+			if (extension.Contains("dat"))
+			{
+				using (FileStream fileStream = new FileStream(filename, FileMode.Open))
+				{
+					using (BinaryReader binaryReader = new BinaryReader(fileStream))
+					{
+						return load(binaryReader, strict, skip, loadedParameters);
+					}
+				}
+			}
+
 			ModelLoader.IModelLoader modelLoader = null;
 			if (extension.Contains("safetensor"))
 			{
@@ -317,6 +329,8 @@ namespace StableDiffusionTorchSharp
 			List<ModelLoader.Tensor> tensors = modelLoader.ReadTensorsInfoFromFile(filename);
 
 			// Load Encoders
+			var t = tensors.First(a => a.Name == "model.diffusion_model.time_embed.0.weight");
+			this.to(t.Type);
 
 			byte[] data = modelLoader.ReadByteFromFile(tensors.First(a => a.Name == "model.diffusion_model.time_embed.0.weight"));
 			time_embedding.linear_1.weight.bytes = data;

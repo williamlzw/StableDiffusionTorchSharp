@@ -137,6 +137,18 @@ namespace StableDiffusionTorchSharp
 		public override Module load(string filename, bool strict = true, IList<string> skip = null, Dictionary<string, bool> loadedParameters = null)
 		{
 			string extension = Path.GetExtension(filename);
+
+			if (extension.Contains("dat"))
+			{
+				using (FileStream fileStream = new FileStream(filename, FileMode.Open))
+				{
+					using (BinaryReader binaryReader = new BinaryReader(fileStream))
+					{
+						return load(binaryReader, strict, skip, loadedParameters);
+					}
+				}
+			}
+
 			ModelLoader.IModelLoader modelLoader = null;
 			if (extension.Contains("safetensor"))
 			{
@@ -149,9 +161,10 @@ namespace StableDiffusionTorchSharp
 
 			List<ModelLoader.Tensor> tensors = modelLoader.ReadTensorsInfoFromFile(filename);
 
-			byte[] data = null;
+			var t = tensors.First(a => a.Name == "first_stage_model.post_quant_conv.weight");
+			this.to(t.Type);
 
-			data = modelLoader.ReadByteFromFile(tensors.First(a => a.Name == "first_stage_model.post_quant_conv.weight"));
+			byte[] data = modelLoader.ReadByteFromFile(tensors.First(a => a.Name == "first_stage_model.post_quant_conv.weight"));
 			((Conv2d)children().ToArray()[0]).weight.bytes = data;
 
 			data = modelLoader.ReadByteFromFile(tensors.First(a => a.Name == "first_stage_model.post_quant_conv.bias"));
