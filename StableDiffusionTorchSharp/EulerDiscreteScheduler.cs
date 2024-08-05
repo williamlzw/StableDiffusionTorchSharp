@@ -1,9 +1,9 @@
-﻿using static TorchSharp.torch;
-using TorchSharp;
+﻿using TorchSharp;
+using static TorchSharp.torch;
 
 namespace StableDiffusionTorchSharp
 {
-    public class EulerDiscreteScheduler
+	public class EulerDiscreteScheduler
     {
         private long num_train_timesteps_;
         private int steps_offset_;

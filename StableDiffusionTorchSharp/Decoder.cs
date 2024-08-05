@@ -13,7 +13,7 @@ namespace StableDiffusionTorchSharp
 		public AttentionBlockA(long channels) : base("AttentionBlockA")
 		{
 			groupnorm = GroupNorm(32, channels);
-			attention = new SelfAttention(1, channels);
+			attention = new SelfAttention(32, channels, causal_mask: true);
 			RegisterComponents();
 		}
 
@@ -86,13 +86,11 @@ namespace StableDiffusionTorchSharp
 			Conv2d(4, 512, kernelSize: 3, padding: 1),
 
 			//mid
-
 			new ResidualBlockA(512, 512),
 			new AttentionBlockA(512),
 			new ResidualBlockA(512, 512),
 
 			// up
-
 			new ResidualBlockA(512, 512),
 			new ResidualBlockA(512, 512),
 			new ResidualBlockA(512, 512),
@@ -116,7 +114,7 @@ namespace StableDiffusionTorchSharp
 			new ResidualBlockA(128, 128),
 
 			GroupNorm(32, 128),
-			SiLU(),
+			GELU(),
 			Conv2d(128, 3, kernelSize: 3, padding: 1)
 
 			)

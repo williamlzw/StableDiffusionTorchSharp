@@ -34,7 +34,7 @@ namespace StableDiffusionTorchSharp
 			{
 				int num_inference_steps = 20;
 				var device = torch.device("cuda");
-				float cfg = 7.5f;
+				float cfg = 5.5f;
 				ulong seed = (ulong)new Random().Next(0, int.MaxValue);
 				string modelname = @".\model\sunshinemix_PrunedFp16.safetensors";
 				torchvision.io.DefaultImager = new torchvision.io.SkiaImager(100);
@@ -66,7 +66,7 @@ namespace StableDiffusionTorchSharp
 
 				string VocabPath = @".\model\vocab.json";
 				string MergesPath = @".\model\merges.txt";
-				//var tokenizera = new TokenizerCustom(VocabPath, MergesPath);//custom Tokenizer
+				var tokenizera = new TokenizerCustom(VocabPath, MergesPath);//custom Tokenizer
 				var tokenizer = new Tokenizer(new Bpe(VocabPath, MergesPath, endOfWordSuffix: "</w>"));
 
 				string prompt = "typographic art bird. stylized, intricate, detailed, artistic, text-based";
@@ -74,7 +74,7 @@ namespace StableDiffusionTorchSharp
 
 				Console.WriteLine("Clip is doing......");
 				var cond_tokens_ids = Tokenize(tokenizer, prompt);
-				//var cond_tokens_idsa = tokenizera.Encode(prompt);//custom Tokenizer
+				var cond_tokens_idsa = tokenizera.Encode(prompt);//custom Tokenizer
 				var cond_tokens = torch.tensor(cond_tokens_ids, torch.@long).unsqueeze(0).to(device);
 				var cond_context = clip.forward(cond_tokens);
 
@@ -83,9 +83,6 @@ namespace StableDiffusionTorchSharp
 				var uncond_context = clip.forward(uncond_tokens);
 
 				var context = torch.cat(new Tensor[] { cond_context, uncond_context }).to(diffusionType).to(device);
-
-				//torch.save(context, "context.dat");
-				//var context = torch.load("context.dat");
 
 				Console.WriteLine("Getting latents......");
 				long[] noise_shape = new long[] { 1, 4, 64, 64 };
