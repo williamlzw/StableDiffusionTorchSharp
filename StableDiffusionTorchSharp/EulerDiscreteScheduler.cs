@@ -1,9 +1,9 @@
-﻿using static TorchSharp.torch;
-using TorchSharp;
+﻿using TorchSharp;
+using static TorchSharp.torch;
 
 namespace StableDiffusionTorchSharp
 {
-    public class EulerDiscreteScheduler
+	public class EulerDiscreteScheduler
     {
         private long num_train_timesteps_;
         private int steps_offset_;
@@ -23,7 +23,7 @@ namespace StableDiffusionTorchSharp
             alphas_cumprod_ = torch.cumprod(alphas_, 0);
             var sigmas = torch.pow((1.0f - alphas_cumprod_) / alphas_cumprod_, 0.5f);
             sigmas_ = torch.cat(new Tensor[] { sigmas.flip(0), torch.tensor(new float[] { 0.0f }) });
-            timesteps_ = torch.linspace(0, num_train_timesteps - 1, num_train_timesteps_, ScalarType.Float32).flip(0);
+            timesteps_ = torch.linspace(0, num_train_timesteps - 1, num_train_timesteps_).flip(0);
         }
 
         public Tensor InitNoiseSigma()
