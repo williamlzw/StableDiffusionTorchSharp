@@ -32,9 +32,10 @@ namespace StableDiffusionTorchSharp
 		{
 			using (torch.no_grad())
 			{
+				bool useFlashAttention = true;         // flash attention only support fp16 or bf16 type
 				int num_inference_steps = 20;
-				var device = torch.device("cuda");
-				float cfg = 5.5f;
+				var device = torch.device("cuda");		// if use flash attention, device must be cuda 
+				float cfg = 7.5f;
 				ulong seed = (ulong)new Random().Next(0, int.MaxValue);
 				string modelname = @".\model\sunshinemix_PrunedFp16.safetensors";
 				torchvision.io.DefaultImager = new torchvision.io.SkiaImager(100);
@@ -43,20 +44,32 @@ namespace StableDiffusionTorchSharp
 				Console.WriteLine("CFG:" + cfg);
 				Console.WriteLine("Seed:" + seed);
 				Console.WriteLine("Loading clip......");
-				var clip = new CLIP();
-				clip.load(modelname);
+				var clip = new CLIP(useFlashAttention: useFlashAttention);
+				clip.load(@".\model\clip.dat");
+				if (useFlashAttention)
+				{
+					clip = clip.half().cuda();
+				}
 				clip = clip.to(device);
 				clip.eval();
 
 				Console.WriteLine("Loading unet......");
-				var diffusion = new Diffusion();
+				var diffusion = new Diffusion(useFlashAttention: useFlashAttention);
 				diffusion.load(modelname);
+				if (useFlashAttention)
+				{
+					diffusion = diffusion.half().cuda();
+				}
 				diffusion = diffusion.to(device);
 				diffusion.eval();
 
 				Console.WriteLine("Loading vae......");
-				var decoder = new Decoder();
-				decoder.load(modelname);
+				var decoder = new Decoder(useFlashAttention: useFlashAttention);
+				decoder.load(@".\model\decoder.dat");
+				if (useFlashAttention)
+				{
+					decoder = decoder.half().cuda();
+				}
 				decoder = decoder.to(device);
 				decoder.eval();
 

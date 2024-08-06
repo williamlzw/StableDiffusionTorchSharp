@@ -10,10 +10,10 @@ namespace StableDiffusionTorchSharp
 		internal readonly GroupNorm groupnorm;
 		internal readonly SelfAttention attention;
 
-		public AttentionBlockA(long channels) : base("AttentionBlockA")
+		public AttentionBlockA(long channels, bool useFlashAttention = false) : base("AttentionBlockA")
 		{
 			groupnorm = GroupNorm(32, channels);
-			attention = new SelfAttention(32, channels, causal_mask: true);
+			attention = new SelfAttention(32, channels, causal_mask: true, useFlashAtten: useFlashAttention);
 			RegisterComponents();
 		}
 
@@ -81,13 +81,13 @@ namespace StableDiffusionTorchSharp
 
 	public class Decoder : Sequential
 	{
-		public Decoder() : base(
+		public Decoder(bool useFlashAttention = false) : base(
 			Conv2d(4, 4, kernelSize: 1),
 			Conv2d(4, 512, kernelSize: 3, padding: 1),
 
 			//mid
 			new ResidualBlockA(512, 512),
-			new AttentionBlockA(512),
+			new AttentionBlockA(512, useFlashAttention: useFlashAttention),
 			new ResidualBlockA(512, 512),
 
 			// up

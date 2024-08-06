@@ -17,7 +17,7 @@ namespace StableDiffusionTorchSharp
 		bool useFlashAtten;
 		Dropout dropout;
 
-		public SelfAttention(long n_heads, long d_embed, bool in_proj_bias = true, bool out_proj_bias = true, bool causal_mask = false, float dropout_p = 0.1f, bool useFlashAtten = true) : base("SelfAttention")
+		public SelfAttention(long n_heads, long d_embed, bool in_proj_bias = true, bool out_proj_bias = true, bool causal_mask = false, float dropout_p = 0.1f, bool useFlashAtten = false) : base("SelfAttention")
 		{
 			in_proj = Linear(d_embed, 3 * d_embed, hasBias: in_proj_bias);
 			out_proj = Linear(d_embed, d_embed, hasBias: out_proj_bias);

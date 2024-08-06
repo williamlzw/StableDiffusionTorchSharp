@@ -90,13 +90,13 @@ namespace StableDiffusionTorchSharp
 		internal readonly Linear linear_geglu_2;
 		internal readonly Conv2d conv_output;
 
-		public AttentionBlock(long n_head, long n_embd, long d_context = 768) : base("AttentionBlock")
+		public AttentionBlock(long n_head, long n_embd, long d_context = 768, bool useFlashAttention = false) : base("AttentionBlock")
 		{
 			var channels = n_head * n_embd;
 			groupnorm = GroupNorm(32, channels);
 			conv_input = Conv2d(channels, channels, kernelSize: 1);
 			layernorm_1 = LayerNorm(channels);
-			attention_1 = new SelfAttention(n_head, channels, in_proj_bias: false);
+			attention_1 = new SelfAttention(n_head, channels, in_proj_bias: false, useFlashAtten: useFlashAttention);
 			layernorm_2 = LayerNorm(channels);
 			attention_2 = new CrossAttention(n_head, channels, d_context, in_proj_bias: false);
 			layernorm_3 = LayerNorm(channels);
@@ -197,40 +197,40 @@ namespace StableDiffusionTorchSharp
 		internal readonly SwitchSequential bottleneck;
 		internal readonly ModuleList<SwitchSequential> decoders;
 
-		public UNet() : base("UNet")
+		public UNet(bool useFlashAttention = false) : base("UNet")
 		{
 			encoders = new ModuleList<SwitchSequential>(
 				new SwitchSequential(Conv2d(4, 320, 3, padding: 1)),
-				new SwitchSequential(new ResidualBlock(320, 320), new AttentionBlock(8, 40)),
-				new SwitchSequential(new ResidualBlock(320, 320), new AttentionBlock(8, 40)),
+				new SwitchSequential(new ResidualBlock(320, 320), new AttentionBlock(8, 40, useFlashAttention: useFlashAttention)),
+				new SwitchSequential(new ResidualBlock(320, 320), new AttentionBlock(8, 40, useFlashAttention: useFlashAttention)),
 				new SwitchSequential(Conv2d(320, 320, 3, stride: 2, padding: 1)),
-				new SwitchSequential(new ResidualBlock(320, 640), new AttentionBlock(8, 80)),
-				new SwitchSequential(new ResidualBlock(640, 640), new AttentionBlock(8, 80)),
+				new SwitchSequential(new ResidualBlock(320, 640), new AttentionBlock(8, 80, useFlashAttention: useFlashAttention)),
+				new SwitchSequential(new ResidualBlock(640, 640), new AttentionBlock(8, 80, useFlashAttention: useFlashAttention)),
 				new SwitchSequential(Conv2d(640, 640, 3, stride: 2, padding: 1)),
-				new SwitchSequential(new ResidualBlock(640, 1280), new AttentionBlock(8, 160)),
-				new SwitchSequential(new ResidualBlock(1280, 1280), new AttentionBlock(8, 160)),
+				new SwitchSequential(new ResidualBlock(640, 1280), new AttentionBlock(8, 160, useFlashAttention: useFlashAttention)),
+				new SwitchSequential(new ResidualBlock(1280, 1280), new AttentionBlock(8, 160, useFlashAttention: useFlashAttention)),
 				new SwitchSequential(Conv2d(1280, 1280, 3, stride: 2, padding: 1)),
 				new SwitchSequential(new ResidualBlock(1280, 1280)),
 				new SwitchSequential(new ResidualBlock(1280, 1280))
 				);
 			bottleneck = new SwitchSequential(
 				new ResidualBlock(1280, 1280),
-				new AttentionBlock(8, 160),
+				new AttentionBlock(8, 160, useFlashAttention: useFlashAttention),
 				new ResidualBlock(1280, 1280)
 				);
 			decoders = new ModuleList<SwitchSequential>(
 				new SwitchSequential(new ResidualBlock(2560, 1280)),
 				new SwitchSequential(new ResidualBlock(2560, 1280)),
 				new SwitchSequential(new ResidualBlock(2560, 1280), new Upsample(1280)),
-				new SwitchSequential(new ResidualBlock(2560, 1280), new AttentionBlock(8, 160)),
-				new SwitchSequential(new ResidualBlock(2560, 1280), new AttentionBlock(8, 160)),
-				new SwitchSequential(new ResidualBlock(1920, 1280), new AttentionBlock(8, 160), new Upsample(1280)),
-				new SwitchSequential(new ResidualBlock(1920, 640), new AttentionBlock(8, 80)),
-				new SwitchSequential(new ResidualBlock(1280, 640), new AttentionBlock(8, 80)),
-				new SwitchSequential(new ResidualBlock(960, 640), new AttentionBlock(8, 80), new Upsample(640)),
-				new SwitchSequential(new ResidualBlock(960, 320), new AttentionBlock(8, 40)),
-				new SwitchSequential(new ResidualBlock(640, 320), new AttentionBlock(8, 40)),
-				new SwitchSequential(new ResidualBlock(640, 320), new AttentionBlock(8, 40))
+				new SwitchSequential(new ResidualBlock(2560, 1280), new AttentionBlock(8, 160, useFlashAttention: useFlashAttention)),
+				new SwitchSequential(new ResidualBlock(2560, 1280), new AttentionBlock(8, 160, useFlashAttention: useFlashAttention)),
+				new SwitchSequential(new ResidualBlock(1920, 1280), new AttentionBlock(8, 160, useFlashAttention: useFlashAttention), new Upsample(1280)),
+				new SwitchSequential(new ResidualBlock(1920, 640), new AttentionBlock(8, 80, useFlashAttention: useFlashAttention)),
+				new SwitchSequential(new ResidualBlock(1280, 640), new AttentionBlock(8, 80, useFlashAttention: useFlashAttention)),
+				new SwitchSequential(new ResidualBlock(960, 640), new AttentionBlock(8, 80, useFlashAttention: useFlashAttention), new Upsample(640)),
+				new SwitchSequential(new ResidualBlock(960, 320), new AttentionBlock(8, 40, useFlashAttention: useFlashAttention)),
+				new SwitchSequential(new ResidualBlock(640, 320), new AttentionBlock(8, 40, useFlashAttention: useFlashAttention)),
+				new SwitchSequential(new ResidualBlock(640, 320), new AttentionBlock(8, 40, useFlashAttention: useFlashAttention))
 				);
 			RegisterComponents();
 		}
@@ -284,10 +284,10 @@ namespace StableDiffusionTorchSharp
 		internal readonly UNet unet;
 		internal readonly FinalLayer final;
 
-		public Diffusion() : base("Diffusion")
+		public Diffusion(bool useFlashAttention = false) : base("Diffusion")
 		{
 			time_embedding = new TimeEmbedding(320);
-			unet = new UNet();
+			unet = new UNet(useFlashAttention);
 			final = new FinalLayer(320, 4);
 			RegisterComponents();
 		}

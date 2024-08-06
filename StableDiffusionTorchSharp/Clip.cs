@@ -33,10 +33,10 @@ namespace StableDiffusionTorchSharp
 		internal readonly Linear linear_1;
 		internal readonly Linear linear_2;
 
-		internal CLIPLayer(long n_head, long n_embd) : base("CLIPLayer")
+		internal CLIPLayer(long n_head, long n_embd, bool useFlashAttention = false) : base("CLIPLayer")
 		{
 			layernorm_1 = LayerNorm(n_embd);
-			attention = new SelfAttention(n_head, n_embd, causal_mask: true);
+			attention = new SelfAttention(n_head, n_embd, causal_mask: true, useFlashAtten: useFlashAttention);
 			layernorm_2 = LayerNorm(n_embd);
 			linear_1 = Linear(n_embd, 4 * n_embd);
 			linear_2 = Linear(4 * n_embd, n_embd);
@@ -66,13 +66,13 @@ namespace StableDiffusionTorchSharp
 		internal readonly ModuleList<Module<Tensor, Tensor>> layers;
 		internal readonly LayerNorm layernorm;
 
-		internal CLIP() : base("CLIP")
+		internal CLIP(bool useFlashAttention = false) : base("CLIP")
 		{
 			embedding = new CLIPEmbedding(49408, 768, 77);
 			layers = nn.ModuleList<Module<Tensor, Tensor>>();
 			for (int i = 0; i < 12; i++)
 			{
-				layers.Add(new CLIPLayer(12, 768));
+				layers.Add(new CLIPLayer(12, 768, useFlashAttention: useFlashAttention));
 			}
 			layernorm = LayerNorm(768);
 			RegisterComponents();
@@ -94,7 +94,7 @@ namespace StableDiffusionTorchSharp
 		{
 			string extension = Path.GetExtension(filename);
 
-			if (extension.Contains("dat"))
+			if (extension.ToLower().Contains("dat"))
 			{
 				using (FileStream fileStream = new FileStream(filename, FileMode.Open))
 				{
@@ -106,11 +106,11 @@ namespace StableDiffusionTorchSharp
 			}
 
 			ModelLoader.IModelLoader modelLoader = null;
-			if (extension.Contains("safetensor"))
+			if (extension.ToLower().Contains("safetensor"))
 			{
 				modelLoader = new ModelLoader.SafetensorsLoader();
 			}
-			else if (extension.Contains("pt"))
+			else if (extension.ToLower().Contains("pt"))
 			{
 				modelLoader = new ModelLoader.PickleLoader();
 			}
